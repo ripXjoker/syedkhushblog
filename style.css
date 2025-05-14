@@ -4,9 +4,13 @@
 	--gold: 84.16% 0.1169 71.19;
 	--mint: 84.12% 0.1334 165.28;
 	--mobile--w: 360px;
-	--mobile--h: 540px;
+	--mobile--h: 540px; /* You might want to make this auto or min-height if content varies */
 	--outline-w: 9px;
-	--preview-bg: #fff;
+	--preview-bg: #fff; /* Used for outline and default bright card bg on hover */
+
+    /* NEW: Custom property for the background of Q&A cards */
+    --card-content-bg: #f0f0f0; /* A light grey, change as you like (e.g., #ffffff for white) */
+    --card-content-text-color: #222222; /* Dark text for light background */
 }
 
 body {
@@ -18,26 +22,21 @@ body {
 	);
 	background-attachment: fixed;
 	padding: 3rem 10vw;
-    font-family: sans-serif; /* Added a default font for better readability */
-    box-sizing: border-box; /* Good practice */
+    font-family: sans-serif;
+    box-sizing: border-box;
 }
 
 *, *::before, *::after {
-    box-sizing: inherit; /* Inherit box-sizing */
+    box-sizing: inherit;
 }
 
 .preview__container {
 	display: flex;
 	flex-wrap: wrap;
-	place-items: center;
+	place-items: start; /* Align items to the start if height is variable */
 	place-content: center;
-	height: 100%;
-    gap: 20px; /* Added some gap between cards */
-}
-
-/* fade out other cards when one is :hover/:focus-within */
-.preview__container:has(:hover, :focus-within) .preview:not(:hover, :focus) {
-	opacity: 0.4;
+	/* height: 100%; */ /* Comment out or adjust if cards have variable height */
+    gap: 30px; /* Increased gap a bit */
 }
 
 .preview {
@@ -50,7 +49,8 @@ body {
 	--shadow-color: oklch(var(--bg));
 
 	background-clip: padding-box;
-	background-image: var(--img); /* This uses the --img from your inline style on the section */
+    /* Default background properties - will be overridden for Q&A cards */
+	background-image: var(--img);
 	background-position-y: var(--bg-pos-y);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -63,6 +63,7 @@ body {
 	transition-property: border, box-shadow, filter, outline-offset, opacity, rotate, scale, z-index;
 	transition-duration: 0.15s, 0.15s, 0.6s, 0.6s, 0.3s, 0.3s, 0.3s, 0.15s;
 
+    /* Default filter properties - will be overridden for Q&A cards */
 	filter: grayscale(100%) sepia(5%);
 	mix-blend-mode: multiply;
 	opacity: 0.69;
@@ -73,12 +74,12 @@ body {
 	outline: var(--outline-w) solid var(--preview-bg);
 	outline-offset: var(--outline-w);
 
-	min-height: var(--mobile--h);
-	height: 100%; /* This might be better as var(--mobile--h) if they are fixed height */
+	min-height: var(--mobile--h); /* Use min-height to allow content to expand */
+    /* height: var(--mobile--h); */ /* Or set fixed height if preferred */
 	min-width: var(--mobile--w);
-	width: 100%; /* This might be better as var(--mobile--w) */
+	width: var(--mobile--w);
 	position: relative;
-    overflow: hidden; /* To contain the qa-content nicely */
+    overflow: hidden;
 
 	animation-name: bg-scroll;
 	animation-delay: var(--delay);
@@ -86,13 +87,34 @@ body {
 	animation-fill-mode: forwards;
 }
 
+
+/* --- STYLES SPECIFICALLY FOR CARDS CONTAINING Q&A CONTENT --- */
+.preview:has(.qa-content) {
+    background-image: none; /* << NO animated image for Q&A cards */
+    background-color: var(--card-content-bg); /* << Solid background for Q&A cards */
+    filter: none;               /* << NO filter by default for Q&A cards */
+    mix-blend-mode: initial;    /* << Normal blend mode for Q&A cards */
+    opacity: 1;                 /* << Fully visible by default for Q&A cards */
+    animation: none;            /* << NO bg-scroll animation for Q&A cards */
+    height: auto;               /* Allow card to grow with content */
+}
+
+/* Text content within Q&A cards */
+.preview:has(.qa-content) .qa-content {
+    color: var(--card-content-text-color); /* Readable text color */
+}
+/* --- END OF Q&A SPECIFIC CARD STYLES --- */
+
+
+/* Hover and Focus states - these apply to ALL .preview cards */
 .preview:focus-within,
 .preview:hover {
 	--shadow-blur: 200px;
-	--shadow-color: oklch(var(--gold));
-	--border-color: var(--shadow-color);
+	--shadow-color: oklch(var(--gold)); /* Gold shadow on hover */
+	--border-color: var(--shadow-color); /* Gold border on hover */
 
-	background-color: white;
+    /* For cards that AREN'T Q&A cards, make their background white on hover */
+    background-color: var(--preview-bg); /* This makes non-QA cards white on hover */
 	mix-blend-mode: initial;
 	filter: none;
 	opacity: 1;
@@ -104,142 +126,114 @@ body {
 	transition-duration: 0.15s, 0.15s, 0.3s, 0.3s, 0.3s, 0.3s, 0.3s, 0.15s;
 }
 
+/* Specific focus color still applies */
 .preview:focus-within {
-	--shadow-color: oklch(var(--pink));
+	--shadow-color: oklch(var(--pink)); /* Pink shadow on focus */
+	--border-color: var(--shadow-color); /* Pink border on focus */
 	z-index: 5;
 }
 
-.preview:hover {
-	z-index: 6;
-}
+/* Specific hover-focus combined color */
 .preview:hover:focus {
-	--shadow-color: oklch(var(--mint));
+	--shadow-color: oklch(var(--mint)); /* Mint shadow on hover+focus */
+    --border-color: var(--shadow-color); /* Mint border on hover+focus */
 }
 
-.preview.mobile {
-	max-height: var(--mobile--h);
+/* Ensure Q&A cards also get the bright border/shadow on hover/focus, but keep their content background */
+.preview:has(.qa-content):hover,
+.preview:has(.qa-content):focus-within {
+    background-color: var(--card-content-bg); /* Keep its defined content background */
+    /* The border and shadow color changes will be inherited from the general .preview:hover rules */
+}
+
+
+.preview.mobile { /* This class might not be strictly needed if all previews are mobile size */
+	max-height: none; /* Allow to grow if height is auto */
+	/* max-height: var(--mobile--h); */ /* Or cap it if you use fixed height */
 	max-width: var(--mobile--w);
-    /* Explicitly set width and height for the mobile class if they should be fixed size */
-    width: var(--mobile--w);
-    height: var(--mobile--h);
 }
 
-.preview:nth-of-type(2) {
+/* Nth-of-type rules for rotation and animation vars still apply to ALL cards, */
+/* but animation itself is disabled for Q&A cards. Rotation will still work. */
+.preview:nth-of-type(2) { /* ... and so on for other nth-of-type rules ... */
 	--bg-pos-y--end: calc(var(--mobile--h) * -1.025);
 	--rotation: 3deg;
 }
-
+/* (Keep all your other .preview:nth-of-type rules here) */
 .preview:nth-of-type(3) {
 	--bg-pos-y--end: calc(var(--mobile--h) * -2.25);
 	--duration: 6.5s;
 	--rotation: -1deg;
 }
-
 .preview:nth-of-type(4) {
 	--bg-pos-y--end: calc(var(--mobile--h) * -3.75);
 	--duration: 6.75s;
 	--rotation: -5deg;
 }
-
 .preview:nth-of-type(5) {
 	--bg-pos-y--end: calc(var(--mobile--h) * -4.82);
 	--duration: 7s;
 	--rotation: -2deg;
 }
-
 .preview:nth-of-type(6) {
 	--bg-pos-y--end: calc(var(--mobile--h) * -5.85);
 	--duration: 7.25s;
 	--rotation: 2deg;
 }
-
 .preview:nth-of-type(7) {
 	--bg-pos-y--end: calc(var(--mobile--h) * -7.21);
 	--duration: 7.5s;
 	--rotation: 4deg;
 }
 
-/* preview-scroll */
+
 @keyframes bg-scroll {
 	to {
 		background-position-y: var(--bg-pos-y--end);
 	}
 }
 
-/* -------------------------------------------------- */
 /* Styles for Q&A content inside the .preview cards */
-/* -------------------------------------------------- */
-
 .preview .qa-content {
-    padding: 20px;
-    /*
-       Text color management:
-       Initially, the card has filters (grayscale, sepia) and mix-blend-mode: multiply.
-       This makes light text hard to read and dark text also blend in.
-       When :hover or :focus-within, these filters are removed and background becomes white-ish.
-    */
-    color: #333; /* Default text color, will be affected by initial filters */
-    overflow-y: auto; /* Allow scrolling if content is too long for the card height */
-    height: 100%; /* Fill the card height */
-    /* box-sizing: border-box; is inherited from body now */
-    position: relative; /* To ensure it's above the animated background */
-    z-index: 1; /* To ensure it's above the animated background */
-}
-
-/* When card is active (hover/focus), filters are off, background is light */
-.preview:hover .qa-content,
-.preview:focus-within .qa-content {
-    color: #000; /* Dark text on light background for readability */
+    padding: 25px 20px; /* Slightly more vertical padding */
+    overflow-y: auto;
+    height: 100%; /* If card height is fixed, this helps. If auto, might not be needed. */
+    position: relative;
+    z-index: 1;
 }
 
 .preview .qa-content summary {
     font-weight: bold;
     cursor: pointer;
-    padding: 8px 0; /* Adjusted padding */
+    padding: 8px 0;
     font-size: 1.1em;
-    list-style: none; /* Remove default disclosure triangle if you want to style your own */
-    position: relative; /* For custom marker */
+    list-style: none;
+    position: relative;
 }
 
-/* Optional: Style for the details marker (triangle) */
 .preview .qa-content summary::before {
-    content: '► '; /* Default closed state */
-    margin-right: 5px;
+    content: '► ';
+    margin-right: 8px; /* More space for marker */
     font-size: 0.8em;
     display: inline-block;
     transition: transform 0.2s ease-in-out;
 }
 
 .preview .qa-content details[open] summary::before {
-    transform: rotate(90deg); /* Open state */
+    transform: rotate(90deg);
 }
 
-
 .preview .qa-content details[open] summary {
-    margin-bottom: 10px;
+    margin-bottom: 12px; /* More space after open summary */
 }
 
 .preview .qa-content p {
     margin-top: 0;
-    margin-bottom: 1em; /* Add some space below paragraphs */
-    line-height: 1.5; /* Adjusted line height for readability */
-    font-size: 0.95em;
+    margin-bottom: 1em;
+    line-height: 1.6; /* Good line height for reading */
+    font-size: 1em;   /* Standardized paragraph font size */
 }
 
-/* Styling for other site elements if you have them */
-.site-header {
-    text-align: center;
-    padding: 20px 0 40px 0; /* Added more bottom padding */
-    color: #e0e0e0; /* Lighter color for better contrast on dark body background */
-}
-
-.site-header h1 {
-    margin-bottom: 0.25em;
-}
-
-footer {
-    text-align: center;
-    color: #ccc;
-    padding: 40px 0 20px 0; /* Added more top padding */
-    font-size: 0.9em;
-}
+/* Other site elements */
+.site-header { /* ... your site header styles ... */ }
+footer { /* ... your footer styles ... */ }
