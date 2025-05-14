@@ -1,16 +1,22 @@
 :root {
-	--bg: 25% 0.0075 70;
+	--bg: 25% 0.0075 70; /* Main page background gradient base */
+
+    /* Border/Shadow Colors */
 	--pink: 77.75% 0.1003 350.51;
 	--gold: 84.16% 0.1169 71.19;
 	--mint: 84.12% 0.1334 165.28;
-	--mobile--w: 360px;
-	--mobile--h: 540px; /* You might want to make this auto or min-height if content varies */
-	--outline-w: 9px;
-	--preview-bg: #fff; /* Used for outline and default bright card bg on hover */
 
-    /* NEW: Custom property for the background of Q&A cards */
-    --card-content-bg: #f0f0f0; /* A light grey, change as you like (e.g., #ffffff for white) */
-    --card-content-text-color: #222222; /* Dark text for light background */
+    /* NEW: Light Background Colors for Cards (derived from border colors) */
+    --pink-light-bg: 95% 0.04 350.51;   /* Very light pink */
+    --gold-light-bg: 95% 0.05 71.19;   /* Very light gold */
+    --mint-light-bg: 95% 0.06 165.28;  /* Very light mint */
+    --card-content-bg-default: #f4f4f4; /* Default light grey for content cards */
+
+	--mobile--w: 360px;
+	--mobile--h-min: 480px; /* Minimum height for cards, can grow */
+	--outline-w: 9px;
+	--preview-bg: #fff; /* Default white background for non-content cards on hover, and outline */
+    --card-content-text-color: #2c3e50; /* Slightly softer dark text */
 }
 
 body {
@@ -22,7 +28,7 @@ body {
 	);
 	background-attachment: fixed;
 	padding: 3rem 10vw;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Nicer sans-serif stack */
     box-sizing: border-box;
 }
 
@@ -33,10 +39,9 @@ body {
 .preview__container {
 	display: flex;
 	flex-wrap: wrap;
-	place-items: start; /* Align items to the start if height is variable */
+	place-items: start;
 	place-content: center;
-	/* height: 100%; */ /* Comment out or adjust if cards have variable height */
-    gap: 30px; /* Increased gap a bit */
+    gap: 35px; /* Slightly more gap */
 }
 
 .preview {
@@ -46,11 +51,10 @@ body {
 	--delay: 0;
 	--duration: 6s;
 	--shadow-blur: 24px;
-	--shadow-color: oklch(var(--bg));
+	--shadow-color: oklch(var(--bg)); /* Default shadow color from page bg */
 
 	background-clip: padding-box;
-    /* Default background properties - will be overridden for Q&A cards */
-	background-image: var(--img);
+	background-image: var(--img); /* Used by default if --img is set on container */
 	background-position-y: var(--bg-pos-y);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -60,10 +64,9 @@ body {
 	border-radius: 6px;
 	box-shadow: 0 0 var(--shadow-blur) 0 var(--shadow-color);
 
-	transition-property: border, box-shadow, filter, outline-offset, opacity, rotate, scale, z-index;
-	transition-duration: 0.15s, 0.15s, 0.6s, 0.6s, 0.3s, 0.3s, 0.3s, 0.15s;
+	transition-property: border, box-shadow, background-color, filter, outline-offset, opacity, rotate, scale, z-index;
+	transition-duration: 0.2s; /* Slightly faster overall transition */
 
-    /* Default filter properties - will be overridden for Q&A cards */
 	filter: grayscale(100%) sepia(5%);
 	mix-blend-mode: multiply;
 	opacity: 0.69;
@@ -74,8 +77,7 @@ body {
 	outline: var(--outline-w) solid var(--preview-bg);
 	outline-offset: var(--outline-w);
 
-	min-height: var(--mobile--h); /* Use min-height to allow content to expand */
-    /* height: var(--mobile--h); */ /* Or set fixed height if preferred */
+	min-height: var(--mobile--h-min);
 	min-width: var(--mobile--w);
 	width: var(--mobile--w);
 	position: relative;
@@ -87,153 +89,150 @@ body {
 	animation-fill-mode: forwards;
 }
 
-
-/* --- STYLES SPECIFICALLY FOR CARDS CONTAINING Q&A CONTENT --- */
-.preview:has(.qa-content) {
-    background-image: none; /* << NO animated image for Q&A cards */
-    background-color: var(--card-content-bg); /* << Solid background for Q&A cards */
-    filter: none;               /* << NO filter by default for Q&A cards */
-    mix-blend-mode: initial;    /* << Normal blend mode for Q&A cards */
-    opacity: 1;                 /* << Fully visible by default for Q&A cards */
-    animation: none;            /* << NO bg-scroll animation for Q&A cards */
-    height: auto;               /* Allow card to grow with content */
+/* --- STYLES FOR CONTENT CARDS (Q&A and My Thoughts) --- */
+.preview:has(.qa-content),
+.preview:has(.my-thoughts-content) {
+    background-image: none;
+    background-color: var(--card-content-bg-default);
+    filter: none;
+    mix-blend-mode: initial;
+    opacity: 1;
+    animation: none;
+    height: auto; /* Allow card to grow with content */
 }
 
-/* Text content within Q&A cards */
-.preview:has(.qa-content) .qa-content {
-    color: var(--card-content-text-color); /* Readable text color */
+.preview:has(.qa-content) .qa-content,
+.preview:has(.my-thoughts-content) .my-thoughts-content {
+    color: var(--card-content-text-color);
 }
-/* --- END OF Q&A SPECIFIC CARD STYLES --- */
+/* --- END OF CONTENT CARD SPECIFIC STYLES --- */
 
-
-/* Hover and Focus states - these apply to ALL .preview cards */
-.preview:focus-within,
+/* HOVER & FOCUS STATES FOR ALL CARDS */
 .preview:hover {
-	--shadow-blur: 200px;
-	--shadow-color: oklch(var(--gold)); /* Gold shadow on hover */
-	--border-color: var(--shadow-color); /* Gold border on hover */
-
-    /* For cards that AREN'T Q&A cards, make their background white on hover */
-    background-color: var(--preview-bg); /* This makes non-QA cards white on hover */
+	--shadow-color: oklch(var(--gold));
+	--border-color: var(--shadow-color);
+    background-color: var(--preview-bg); /* Default hover bg for non-content cards */
 	mix-blend-mode: initial;
 	filter: none;
 	opacity: 1;
 	outline-offset: calc(var(--outline-w) / 2);
 	scale: 1;
 	rotate: 0deg;
-
-	transition-property: border, box-shadow, filter, outline-offset, opacity, rotate, scale, z-index;
-	transition-duration: 0.15s, 0.15s, 0.3s, 0.3s, 0.3s, 0.3s, 0.3s, 0.15s;
+	z-index: 6;
 }
 
-/* Specific focus color still applies */
 .preview:focus-within {
-	--shadow-color: oklch(var(--pink)); /* Pink shadow on focus */
-	--border-color: var(--shadow-color); /* Pink border on focus */
-	z-index: 5;
+	--shadow-color: oklch(var(--pink));
+	--border-color: var(--shadow-color);
+    /* background-color will be handled by specificity below or default to .preview:hover */
+	mix-blend-mode: initial;
+	filter: none;
+	opacity: 1;
+	outline-offset: calc(var(--outline-w) / 2);
+	scale: 1;
+	rotate: 0deg;
+	z-index: 5; /* Lower z-index than hover to allow hover to override if both active */
 }
 
-/* Specific hover-focus combined color */
-.preview:hover:focus {
-	--shadow-color: oklch(var(--mint)); /* Mint shadow on hover+focus */
-    --border-color: var(--shadow-color); /* Mint border on hover+focus */
+.preview:hover:focus-within { /* When both hovered and focused */
+    --shadow-color: oklch(var(--mint));
+	--border-color: var(--shadow-color);
+    z-index: 7; /* Highest z-index */
 }
 
-/* Ensure Q&A cards also get the bright border/shadow on hover/focus, but keep their content background */
+/* BACKGROUND COLOR CHANGES FOR CONTENT CARDS ON HOVER/FOCUS */
 .preview:has(.qa-content):hover,
-.preview:has(.qa-content):focus-within {
-    background-color: var(--card-content-bg); /* Keep its defined content background */
-    /* The border and shadow color changes will be inherited from the general .preview:hover rules */
+.preview:has(.my-thoughts-content):hover {
+    background-color: oklch(var(--gold-light-bg));
 }
 
-
-.preview.mobile { /* This class might not be strictly needed if all previews are mobile size */
-	max-height: none; /* Allow to grow if height is auto */
-	/* max-height: var(--mobile--h); */ /* Or cap it if you use fixed height */
-	max-width: var(--mobile--w);
+.preview:has(.qa-content):focus-within,
+.preview:has(.my-thoughts-content):focus-within {
+    background-color: oklch(var(--pink-light-bg));
 }
 
-/* Nth-of-type rules for rotation and animation vars still apply to ALL cards, */
-/* but animation itself is disabled for Q&A cards. Rotation will still work. */
-.preview:nth-of-type(2) { /* ... and so on for other nth-of-type rules ... */
-	--bg-pos-y--end: calc(var(--mobile--h) * -1.025);
-	--rotation: 3deg;
-}
-/* (Keep all your other .preview:nth-of-type rules here) */
-.preview:nth-of-type(3) {
-	--bg-pos-y--end: calc(var(--mobile--h) * -2.25);
-	--duration: 6.5s;
-	--rotation: -1deg;
-}
-.preview:nth-of-type(4) {
-	--bg-pos-y--end: calc(var(--mobile--h) * -3.75);
-	--duration: 6.75s;
-	--rotation: -5deg;
-}
-.preview:nth-of-type(5) {
-	--bg-pos-y--end: calc(var(--mobile--h) * -4.82);
-	--duration: 7s;
-	--rotation: -2deg;
-}
-.preview:nth-of-type(6) {
-	--bg-pos-y--end: calc(var(--mobile--h) * -5.85);
-	--duration: 7.25s;
-	--rotation: 2deg;
-}
-.preview:nth-of-type(7) {
-	--bg-pos-y--end: calc(var(--mobile--h) * -7.21);
-	--duration: 7.5s;
-	--rotation: 4deg;
+.preview:has(.qa-content):hover:focus-within,
+.preview:has(.my-thoughts-content):hover:focus-within {
+    background-color: oklch(var(--mint-light-bg));
 }
 
+/* Nth-of-type rules for rotation (applies to all cards) */
+.preview:nth-of-type(1) { --rotation: -3deg; }
+.preview:nth-of-type(2) { --rotation: 2deg; }
+.preview:nth-of-type(3) { --rotation: -2deg; }
+.preview:nth-of-type(4) { --rotation: 3deg; }
+.preview:nth-of-type(5) { --rotation: -1deg; }
+.preview:nth-of-type(6) { --rotation: 1deg; }
+.preview:nth-of-type(7) { --rotation: -2.5deg; }
+.preview:nth-of-type(8) { --rotation: 2.5deg; } /* Rotation for the new card */
+/* If you have more cards with animated bg, extend nth-of-type for --bg-pos-y--end */
 
-@keyframes bg-scroll {
-	to {
-		background-position-y: var(--bg-pos-y--end);
-	}
-}
 
-/* Styles for Q&A content inside the .preview cards */
+@keyframes bg-scroll { to { background-position-y: var(--bg-pos-y--end); } }
+
+/* Q&A Content Styling */
 .preview .qa-content {
-    padding: 25px 20px; /* Slightly more vertical padding */
+    padding: 25px 20px;
     overflow-y: auto;
-    height: 100%; /* If card height is fixed, this helps. If auto, might not be needed. */
+    height: 100%;
     position: relative;
     z-index: 1;
 }
-
 .preview .qa-content summary {
-    font-weight: bold;
+    font-weight: 600; /* Slightly bolder */
     cursor: pointer;
-    padding: 8px 0;
-    font-size: 1.1em;
+    padding: 10px 0;
+    font-size: 1.15em;
     list-style: none;
     position: relative;
+    display: flex; /* For better alignment of marker */
+    align-items: center;
 }
-
 .preview .qa-content summary::before {
-    content: '► ';
-    margin-right: 8px; /* More space for marker */
-    font-size: 0.8em;
+    content: '►';
+    margin-right: 10px;
+    font-size: 0.7em;
     display: inline-block;
     transition: transform 0.2s ease-in-out;
+    line-height: 1; /* Prevent marker from affecting line height */
 }
-
-.preview .qa-content details[open] summary::before {
-    transform: rotate(90deg);
-}
-
-.preview .qa-content details[open] summary {
-    margin-bottom: 12px; /* More space after open summary */
-}
-
+.preview .qa-content details[open] summary::before { transform: rotate(90deg); }
+.preview .qa-content details[open] summary { margin-bottom: 12px; }
 .preview .qa-content p {
     margin-top: 0;
-    margin-bottom: 1em;
-    line-height: 1.6; /* Good line height for reading */
-    font-size: 1em;   /* Standardized paragraph font size */
+    margin-bottom: 1.2em;
+    line-height: 1.65;
+    font-size: 0.95em;
 }
 
-/* Other site elements */
-.site-header { /* ... your site header styles ... */ }
-footer { /* ... your footer styles ... */ }
+/* "My Thoughts" Card Content Styling */
+.preview .my-thoughts-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+.preview .my-thoughts-content .question-mark {
+    font-size: 10em; /* Big question mark */
+    font-weight: bold;
+    line-height: 1;
+    color: var(--card-content-text-color); /* Or a specific color */
+    opacity: 0.7; /* Slightly subtle */
+}
+.preview .my-thoughts-content .thoughts-text {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-top: 10px;
+    color: var(--card-content-text-color);
+}
+
+/* Site Header & Footer */
+.site-header { text-align: center; padding: 20px 0 40px 0; color: #e0e0e0; }
+.site-header h1 { margin-bottom: 0.25em; font-size: 2.5em;}
+.site-header p { font-size: 1.1em; }
+footer { text-align: center; color: #ccc; padding: 40px 0 20px 0; font-size: 0.9em; }
