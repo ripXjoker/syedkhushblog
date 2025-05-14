@@ -1,120 +1,156 @@
-/* Basic Reset & Typography */
+:root {
+	--bg: 25% 0.0075 70;
+	--pink: 77.75% 0.1003 350.51;
+	--gold: 84.16% 0.1169 71.19;
+	--mint: 84.12% 0.1334 165.28;
+	--mobile--w: 360px;
+	--mobile--h: 540px;
+	--outline-w: 9px;
+	--preview-bg: #fff;
+}
+
 body {
-    font-family: 'Georgia', 'Times New Roman', serif; /* A more "classic" philosophical feel */
-    line-height: 1.7;
-    margin: 0;
-    padding: 0;
-    background-color: #fdfdfd; /* Very light grey, almost white */
-    color: #222; /* Dark grey for text, not stark black */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+	height: 100%;
+	background: linear-gradient(
+		50deg,
+		oklch(from oklch(var(--bg)) 50% c h),
+		oklch(from oklch(var(--bg)) 90% c h)
+	);
+	background-attachment: fixed;
+	padding: 3rem 10vw;
 }
 
-header {
-    text-align: center;
-    padding: 40px 20px 20px;
-    border-bottom: 1px solid #e0e0e0;
-    background-color: #fff;
+.preview__container {
+	display: flex;
+	flex-wrap: wrap;
+	place-items: center;
+	place-content: center;
+	height: 100%;
 }
 
-header h1 {
-    font-size: 2.5em;
-    margin-bottom: 0.2em;
-    font-weight: normal;
-    color: #1a1a1a;
+/* fade out other cards when one is :hover/:focus-within */
+.preview__container:has(:hover, :focus-within) .preview:not(:hover, :focus) {
+	opacity: 0.4;
 }
 
-.subtitle {
-    font-size: 1.1em;
-    color: #555;
-    font-style: italic;
+.preview {
+	--bg-pos-y--start: 0;
+	--bg-pos-y--end: 0;
+	--bg-pos-y: var(--bg-pos-y--start);
+	--delay: 0;
+	--duration: 6s;
+	--shadow-blur: 24px;
+	--shadow-color: oklch(var(--bg));
+
+	background-clip: padding-box;
+	background-image: var(--img); /* This uses the --img from your inline style on the section */
+	background-position-y: var(--bg-pos-y);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+
+	border: var(--outline-w) solid var(--border-color, transparent);
+	border-radius: 6px;
+	box-shadow: 0 0 var(--shadow-blur) 0 var(--shadow-color);
+
+	transition-property: border, box-shadow, filter, outline-offset, opacity, rotate, scale, z-index;
+	transition-duration: 0.15s, 0.15s, 0.6s, 0.6s, 0.3s, 0.3s, 0.3s, 0.15s;
+
+	filter: grayscale(100%) sepia(5%);
+	mix-blend-mode: multiply;
+	opacity: 0.69;
+
+	scale: 0.85;
+	rotate: var(--rotation, -4deg);
+
+	outline: var(--outline-w) solid var(--preview-bg);
+	outline-offset: var(--outline-w);
+
+	min-height: var(--mobile--h);
+	height: 100%;
+	min-width: var(--mobile--w);
+	width: 100%;
+	position: relative;
+
+	animation-name: bg-scroll;
+	animation-delay: var(--delay);
+	animation-duration: var(--duration);
+	animation-fill-mode: forwards;
 }
 
-/* Accordion Container */
-.accordion-container {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 0 20px;
-    flex-grow: 1; /* Makes the main content take available space */
+.preview:focus-within,
+.preview:hover {
+	--shadow-blur: 200px;
+	--shadow-color: oklch(var(--gold));
+	--border-color: var(--shadow-color);
+
+	background-color: white;
+	mix-blend-mode: initial;
+	filter: none;
+	opacity: 1;
+	outline-offset: calc(var(--outline-w) / 2);
+	scale: 1;
+	rotate: 0deg;
+
+	transition-property: border, box-shadow, filter, outline-offset, opacity, rotate, scale, z-index;
+	transition-duration: 0.15s, 0.15s, 0.3s, 0.3s, 0.3s, 0.3s, 0.3s, 0.15s;
 }
 
-/* Styling for each <details> element (the "stack") */
-details {
-    background-color: #fff;
-    margin-bottom: 12px;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    transition: box-shadow 0.2s ease-in-out;
+.preview:focus-within {
+	--shadow-color: oklch(var(--pink));
+	z-index: 5;
 }
 
-details:hover {
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+.preview:hover {
+	z-index: 6;
+}
+.preview:hover:focus {
+	--shadow-color: oklch(var(--mint));
 }
 
-/* Styling for the <summary> element (the clickable question) */
-summary {
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 15px 20px;
-    cursor: pointer;
-    outline: none; /* Removes the default focus outline on some browsers */
-    list-style: none; /* Removes the default triangle/marker */
-    position: relative; /* For custom marker */
-    color: #333;
+.preview.mobile {
+	max-height: var(--mobile--h);
+	max-width: var(--mobile--w);
 }
 
-/* Custom marker for open/close state */
-summary::before {
-    content: '+'; /* Plus sign for closed state */
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.3em;
-    font-weight: normal; /* Make the plus/minus less bold than text */
-    color: #777;
-    transition: transform 0.2s ease-in-out;
+.preview:nth-of-type(2) {
+	--bg-pos-y--end: calc(var(--mobile--h) * -1.025);
+	--rotation: 3deg;
 }
 
-details[open] summary::before {
-    content: '−'; /* Minus sign for open state */
-    transform: translateY(-50%) rotate(180deg); /* Optional: animate rotation for minus */
+.preview:nth-of-type(3) {
+	--bg-pos-y--end: calc(var(--mobile--h) * -2.25);
+	--duration: 6.5s;
+	--rotation: -1deg;
 }
 
-/* Styling for the .content div (the answer) */
-.content {
-    padding: 0px 20px 20px 20px; /* More padding at bottom and sides */
-    border-top: 1px dashed #e0e0e0; /* A subtle separator */
-    font-size: 1em;
-    color: #444;
+.preview:nth-of-type(4) {
+	--bg-pos-y--end: calc(var(--mobile--h) * -3.75);
+	--duration: 6.75s;
+	--rotation: -5deg;
 }
 
-.content p {
-    margin-top: 10px;
-    margin-bottom: 0;
+.preview:nth-of-type(5) {
+	--bg-pos-y--end: calc(var(--mobile--h) * -4.82);
+	--duration: 7s;
+	--rotation: -2deg;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9em;
-    color: #666;
-    border-top: 1px solid #e0e0e0;
-    background-color: #fff;
+.preview:nth-of-type(6) {
+	--bg-pos-y--end: calc(var(--mobile--h) * -5.85);
+	--duration: 7.25s;
+	--rotation: 2deg;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
-    }
-    summary {
-        font-size: 1.1em;
-    }
-    .content {
-        font-size: 0.95em;
-    }
+.preview:nth-of-type(7) {
+	--bg-pos-y--end: calc(var(--mobile--h) * -7.21);
+	--duration: 7.5s;
+	--rotation: 4deg;
+}
+
+/* preview-scroll */
+@keyframes bg-scroll {
+	to {
+		background-position-y: var(--bg-pos-y--end);
+	}
 }
