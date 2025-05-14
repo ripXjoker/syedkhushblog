@@ -3,80 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoes of Existence</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Echoes of Existence - Styled</title>
+    <link rel="stylesheet" href="path/to/your/compiled-style.css"> {/* Make sure this path is correct! */}
+    <style>
+        /* Additional styles for Q&A content inside cards */
+        .preview .qa-content {
+            padding: 20px; /* Add some padding inside the card */
+            color: #333; /* Default text color - will be white on hover/focus */
+            overflow-y: auto; /* Allow scrolling if content is too long */
+            height: 100%; /* Try to fill the card */
+            box-sizing: border-box;
+        }
+
+        .preview:hover .qa-content,
+        .preview:focus-within .qa-content {
+            color: #000; /* Text color when card is active */
+        }
+
+        .preview .qa-content summary {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .preview .qa-content details[open] summary {
+            margin-bottom: 10px;
+        }
+
+        .preview .qa-content p {
+            margin-top: 0;
+            line-height: 1.6;
+        }
+
+        /* Adjust the main body to make space if needed, or style as per your site */
+        body {
+            /* The body styles from the compiled CSS will apply here */
+            font-family: sans-serif; /* Example font */
+        }
+        .site-header { /* Example for your existing site header if you have one */
+            text-align: center;
+            padding: 20px;
+            color: #eee; /* Adjust as needed if it's on the dark gradient */
+        }
+    </style>
 </head>
 <body>
-    <header>
+
+    <div class="site-header">
         <h1>Echoes of Existence</h1>
-        <p class="subtitle">Brief inquiries into the fabric of being.</p>
-    </header>
+        <p>Brief inquiries into the fabric of being.</p>
+    </div>
 
-    <main class="accordion-container">
-        <details>
-            <summary>What is dream?</summary>
-            <div class="content">
-                <p>A nocturnal theatre where the self auditions for other selves, scripted by echoes of the day and whispers from the void.</p>
-            </div>
-        </details>
+    <!-- This is where the mobile card styling will apply -->
+    <section class="preview__container" style="--img: url(https://assets.codepen.io/2392/360__homepage--full.png);">
 
-        <details>
-            <summary>Why do we cry at born?</summary>
-            <div class="content">
-                <p>The first protest against the shock of separation, the raw symphony of air filling lungs once cradled in silence.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>What is dream?</summary>
+                    <p>A dream is a succession of images, ideas, emotions, and sensations that usually occur involuntarily in the mind during certain stages of sleep. The content and purpose of dreams are not fully understood, though they have been a topic of scientific, philosophical and religious interest throughout recorded history.</p>
+                </details>
             </div>
-        </details>
+        </article>
 
-        <details>
-            <summary>What exactly happens after death?</summary>
-            <div class="content">
-                <p>The grandest question mark, perhaps a return to the stardust from whence we came, or the silence before a new song.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>Why do we cry at born?</summary>
+                    <p>A baby's first cry is a crucial sign that their lungs are working. Before birth, babies get oxygen through the umbilical cord. Once born, they must breathe on their own. The cry helps to open up the lungs, expel amniotic fluid and mucus, and start the process of independent breathing.</p>
+                </details>
             </div>
-        </details>
+        </article>
 
-        <details>
-            <summary>Why is everything the way it is?</summary>
-            <div class="content">
-                <p>A tapestry woven from chance and necessity, each thread a consequence, its pattern perceived only in retrospect, if at all.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>What exactly happens after death?</summary>
+                    <p>This question is one of humanity's oldest and most profound mysteries, with answers varying widely across cultures, religions, philosophies, and scientific perspectives. From a purely biological standpoint, death involves the cessation of all biological functions that sustain a living organism. What happens beyond that is a matter of belief and speculation.</p>
+                </details>
             </div>
-        </details>
+        </article>
 
-        <details>
-            <summary>What are goosebumps?</summary>
-            <div class="content">
-                <p>The skin's memory of ancient chills and primal awe, a fleeting armor against the unseen or the deeply felt.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>Why is everything the way it is?</summary>
+                    <p>This delves into the realm of metaphysics and cosmology. Scientific explanations point to the Big Bang, the laws of physics, and evolutionary processes. Philosophical perspectives explore concepts of causality, determinism, and purpose. There's no single, universally accepted answer.</p>
+                </details>
             </div>
-        </details>
+        </article>
 
-        <details>
-            <summary>What is déjà vu?</summary>
-            <div class="content">
-                <p>A hiccup in time's perception, the fleeting echo of a life unlived, or a momentary glimpse of the eternal recurrence.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>What are goosebumps?</summary>
+                    <p>Goosebumps, or piloerection, are a temporary local change in the skin from an LRE (local reflex Erection) state to normal. The reflex of piloerection in humans is the same as that of other mammals. It is caused by a contraction of miniature muscles that are attached to each hair (arrector pili muscles). This contraction causes the hair to stand on end whenever the body feels cold or experiences strong emotions, such as fear, pleasure, or awe.</p>
+                </details>
             </div>
-        </details>
+        </article>
 
-        <details>
-            <summary>What is the butterfly effect?</summary>
-            <div class="content">
-                <p>The universe whispering that the smallest flutter of will can sculpt mountains in the landscape of becoming.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>What is déjà vu?</summary>
+                    <p>Déjà vu is the feeling that one has lived through the present situation before. This French phrase translates literally as "already seen." While many theories exist, from neurological glitches to memory association, the exact cause is still debated among scientists.</p>
+                </details>
             </div>
-        </details>
+        </article>
 
-        <!-- Add more questions and answers here -->
-        <!--
-        <details>
-            <summary>Your Next Question?</summary>
-            <div class="content">
-                <p>Your concise, thought-provoking answer.</p>
+        <article class="preview mobile" tabindex="0">
+            <div class="qa-content">
+                <details>
+                    <summary>What is the butterfly effect?</summary>
+                    <p>The butterfly effect is a concept that states that "small causes can have larger effects." Initially used in chaos theory regarding weather prediction, it metaphorically suggests that the flap of a butterfly's wings in Brazil could set off a tornado in Texas. It highlights the sensitive dependence on initial conditions in complex systems.</p>
+                </details>
             </div>
-        </details>
-        -->
-    </main>
+        </article>
+
+        <!-- Add more <article class="preview mobile">...</article> for more Q&A pairs -->
+
+    </section>
 
     <footer>
-        <p>© <span id="year"></span> Your Name/Project. Contemplate freely.</p>
+        <p style="text-align: center; color: #ccc; padding: 20px 0;">
+            © 2025 syedsami/Project. Contemplate freely.
+        </p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
