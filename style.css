@@ -1,198 +1,133 @@
-/* -------- Scrollbar and Selection (from your original CSS) -------- */
-::-webkit-scrollbar {
-  width: 0.625rem;
-  height: 0.625rem;
-}
-::-webkit-scrollbar-thumb {
-  background: #111;
-  border-radius: 0.3125rem;
-  box-shadow: inset 0.125rem 0.125rem 0.125rem rgba(255, 255, 255, 0.25),
-    inset -0.125rem -0.125rem 0.125rem rgba(0, 0, 0, 0.25);
-  cursor: default; /* Note: scrollbar thumb is not typically interactive this way */
-}
-::-webkit-scrollbar-track {
-  background: #333;
-}
-::selection {
-  background: #fff;
-  color: #333;
-}
-
-/* -------- Basic Page Setup for Landing Page -------- */
-html,
+/* Basic Reset & WBW-like Styling */
 body {
-  height: 100vh; /* Full viewport height */
-  /* height: 100dvh; /* Dynamic viewport height, good for mobile */
-  width: 100vw; /* Full viewport width */
-  margin: 0;
-  overflow: hidden; /* Prevent scrollbars on the body itself */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #000000; /* Fallback background if canvas/shader fails */
-}
-
-/* -------- Canvas Styling (for the WebGL shader background) -------- */
-canvas#canvas { /* Added ID for specificity if needed */
-  position: fixed; /* Fixed position to stay in background during any (unlikely) scroll */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures canvas covers the entire screen, may crop edges */
-  background: #050505; /* Dark background for canvas area before shader loads */
-  touch-action: none; /* Useful for preventing default touch behaviors on the canvas */
-  z-index: 0; /* Place canvas behind other content (like the centerBox) */
-}
-
-/* -------- Styling for the "LET'S BEGIN" button/box -------- */
-a#centerBox { /* Using 'a' as it's a link, with ID for specificity */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px 45px; /* Adjusted padding for a slightly larger button */
-    background-color: rgba(30, 30, 30, 0.85); /* Dark, slightly transparent */
-    border: 1px solid rgba(80, 80, 80, 0.7);
-    border-radius: 10px; /* Slightly more rounded */
-    text-align: center;
-    text-decoration: none; /* Remove underline from link */
-    z-index: 10; /* Ensure it's above the canvas */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
-a#centerBox h1 {
+    font-family: 'Noto Sans Telugu', sans-serif; /* Telugu font first */
+    line-height: 1.8;
     margin: 0;
-    font-size: 2.2em; /* Slightly larger text */
-    color: #e0e0e0;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 500; /* Adjusted font weight */
+    padding: 0;
+    background-color: #fdfdfd; /* Very light grey, almost white */
+    color: #333; /* Dark grey text */
+    font-size: 18px; /* Good base font size for readability */
 }
 
-a#centerBox:hover {
-    background-color: rgba(50, 50, 50, 0.95);
-    transform: translate(-50%, -50%) scale(1.03);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6); /* Enhanced hover shadow */
+.container {
+    max-width: 700px; /* WBW has a relatively narrow content width */
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* -------- Hide original CodePen UI elements not needed for the landing page -------- */
-textarea#codeEditor,
-pre#error,
-div#indicator,
-div#controls,
-.overlay { /* .overlay might be dynamically added by your script.js for errors */
-  display: none !important; /* Use !important to ensure override if other styles conflict */
-  visibility: hidden;
+/* Header */
+header {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-
-/* -------- Styles for elements that are NOW HIDDEN (from your original CSS) -------- */
-/* These styles will not have a visible effect on the elements they target because */
-/* those elements are set to 'display: none'. They are kept for completeness if you ever */
-/* decide to show these elements again and want to retain their original styling. */
-
-/*
-.editor, #error {
-  padding: 1em;
+header h1 {
+    font-size: 2.5em;
+    margin: 0 0 10px 0;
+    font-weight: 700;
 }
 
-.editor {
-  color: #fefefe;
-  tab-size: 2;
-  border: none;
-  resize: none;
+header h1 a {
+    text-decoration: none;
+    color: #2c3e50; /* A muted, serious color */
 }
 
-.editor:focus {
-  outline: none;
+header nav a {
+    text-decoration: none;
+    color: #555;
+    margin: 0 15px;
+    font-size: 1.1em;
 }
 
-#controls .controls { // More specific selector if #controls was visible
-  position: relative;
-  display: flex;
-  gap: 1.5em;
-  padding: .5em 1.25em;
-  background: #1111;
-  border-radius: 4px;
+header nav a:hover {
+    color: #000;
 }
 
-#controls .controls::before,
-#controls .controls::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  transform: scale(.95);
-  border-radius: inherit;
-  opacity: 0;
+/* Main Content & Articles */
+main article {
+    margin-bottom: 60px;
 }
 
-#controls .controls::before {
-  background: #aef;
-  animation: pulse 2s infinite;
+main article h2 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    line-height: 1.3;
 }
 
-#controls .controls::after {
-  background: #fefefe66;
-  transition: transform 200ms ease-in-out;
+main article h2 a {
+    text-decoration: none;
+    color: inherit;
 }
 
-#controls .controls:hover::before,
-#controls .controls:hover::after {
-  opacity: 1;
+main article h2 a:hover {
+    text-decoration: underline;
 }
 
-#controls .controls:hover::before {
-  transform: scale(.98);
-  filter: blur(2px);
+main article p.meta {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 20px;
 }
 
-#controls .controls:hover::after {
-  transform: scale(1.025, 1.1);
+main article p {
+    margin-bottom: 1.5em;
 }
 
-#controls .controls:hover {
-  background: #111f;
+main article figure {
+    margin: 30px auto; /* Center the figure */
+    padding: 0;
+    text-align: center; /* Center the image within the figure */
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.0125); }
-  100% { transform: scale(1); }
+main article figure img {
+    max-width: 100%; /* Make images responsive */
+    height: auto;
+    border: 1px solid #ddd; /* Subtle border like WBW often has */
+    display: block; /* Remove extra space below image */
+    margin: 0 auto 10px auto; /* Center image if its width is less than figure */
 }
 
-.hidden { // JS might use this class, but our specific ID selectors will override for hidden elements
-  // display: none !important;
+main article figure figcaption {
+    font-size: 0.9em;
+    color: #555;
+    font-style: italic;
+    text-align: center;
 }
 
-.opaque { // For error messages, which are hidden
-  opacity: 1 !important;
-  // background: #111 !important;
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #777;
 }
 
-div#controls input { // Styles for inputs within the hidden #controls div
-  all: unset;
-  opacity: .2;
-  filter: saturate(0) invert(1);
-  cursor: pointer;
-  transition: opacity 200ms ease-in-out;
-  padding: .25em .5em;
+/* Links */
+a {
+    color: #2980b9; /* A nice blue for links */
 }
 
-div#controls input:hover {
-  opacity: 1;
+a:hover {
+    color: #1c5a81;
 }
 
-div#controls .icon { // Styles for icons within the hidden #controls div
-  text-align: center;
-  line-height: 1;
+/* Responsive adjustments (very basic) */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    body {
+        font-size: 16px;
+    }
+    header h1 {
+        font-size: 2em;
+    }
+    main article h2 {
+        font-size: 1.8em;
+    }
 }
-
-div#controls #btnToggleView { width: 1.25em; }
-div#controls #btnToggleView::after { content: '👁'; }
-div#controls #btnToggleView:checked::after { content: '✏️'; }
-div#controls #btnToggleResolution::after { content: '1️⃣'; }
-div#controls #btnToggleResolution:checked::after { content: '2️⃣'; }
-div#controls #btnReset::after { content: '⏮️'; }
-*/
