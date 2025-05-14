@@ -1,54 +1,82 @@
 <!DOCTYPE html>
-<html lang="te">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>మీ తెలుగు సైట్ పేరు (Your Telugu Site Title) - syedkhush.com</title>
+    <title>Echoes of Existence</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Consider adding a Telugu font from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1><a href="/">సైట్ పేరు (Site Name)</a></h1>
-            <nav>
-                <a href="/">హోమ్ (Home)</a>
-                <a href="/archive.html">ఆర్కైవ్ (Archive)</a>
-                <a href="/about.html">గురించి (About)</a>
-            </nav>
-        </div>
+        <h1>Echoes of Existence</h1>
+        <p class="subtitle">Brief inquiries into the fabric of being.</p>
     </header>
 
-    <main class="container">
-        <article>
-            <h2><a href="/your-post-url.html">మీ మొదటి తెలుగు పోస్ట్ శీర్షిక (Your First Telugu Post Title)</a></h2>
-            <p class="meta">ప్రచురించిన తేదీ: సెప్టెంబర్ 26, 2023 (Published Date: September 26, 2023)</p>
+    <main class="accordion-container">
+        <details>
+            <summary>What is dream?</summary>
+            <div class="content">
+                <p>A nocturnal theatre where the self auditions for other selves, scripted by echoes of the day and whispers from the void.</p>
+            </div>
+        </details>
 
-            <p>ఇక్కడ మీ మొదటి పేరా తెలుగులో వస్తుంది. వెయిట్ బట్ వై లాగా, మీరు లోతైన విశ్లేషణలతో, హాస్యంతో, మరియు ఆసక్తికరమైన విషయాలతో నింపవచ్చు. (Your first paragraph in Telugu goes here. Like Wait But Why, you can fill it with deep analysis, humor, and interesting topics.)</p>
+        <details>
+            <summary>Why do we cry at born?</summary>
+            <div class="content">
+                <p>The first protest against the shock of separation, the raw symphony of air filling lungs once cradled in silence.</p>
+            </div>
+        </details>
 
-            <p>రెండవ పేరా. దృష్టాంతాలను జోడించడం మర్చిపోవద్దు! (Second paragraph. Don't forget to add illustrations!)</p>
+        <details>
+            <summary>What exactly happens after death?</summary>
+            <div class="content">
+                <p>The grandest question mark, perhaps a return to the stardust from whence we came, or the silence before a new song.</p>
+            </div>
+        </details>
 
-            <figure>
-                <img src="images/your-stick-figure-image.png" alt="తెలుగులో వివరణాత్మక చిత్రం (Descriptive image in Telugu)">
-                <figcaption>చిత్రం శీర్షిక తెలుగులో (Image caption in Telugu)</figcaption>
-            </figure>
+        <details>
+            <summary>Why is everything the way it is?</summary>
+            <div class="content">
+                <p>A tapestry woven from chance and necessity, each thread a consequence, its pattern perceived only in retrospect, if at all.</p>
+            </div>
+        </details>
 
-            <p>మరింత కంటెంట్ ఇక్కడ... (More content here...)</p>
+        <details>
+            <summary>What are goosebumps?</summary>
+            <div class="content">
+                <p>The skin's memory of ancient chills and primal awe, a fleeting armor against the unseen or the deeply felt.</p>
+            </div>
+        </details>
 
-            <p>సాధారణంగా WBW పోస్ట్‌లు చాలా పొడవుగా ఉంటాయి, కాబట్టి మీరు చాలా కంటెంట్‌ను సిద్ధం చేసుకోవాలి. (Typically WBW posts are very long, so you'll need to prepare a lot of content.)</p>
-        </article>
+        <details>
+            <summary>What is déjà vu?</summary>
+            <div class="content">
+                <p>A hiccup in time's perception, the fleeting echo of a life unlived, or a momentary glimpse of the eternal recurrence.</p>
+            </div>
+        </details>
 
-        <!-- Add more articles or pagination here -->
+        <details>
+            <summary>What is the butterfly effect?</summary>
+            <div class="content">
+                <p>The universe whispering that the smallest flutter of will can sculpt mountains in the landscape of becoming.</p>
+            </div>
+        </details>
 
+        <!-- Add more questions and answers here -->
+        <!--
+        <details>
+            <summary>Your Next Question?</summary>
+            <div class="content">
+                <p>Your concise, thought-provoking answer.</p>
+            </div>
+        </details>
+        -->
     </main>
 
     <footer>
-        <div class="container">
-            <p>© 2023 మీ పేరు లేదా సైట్ పేరు (Your Name or Site Name). అన్ని హక్కులు ప్రత్యేకించబడ్డాయి.</p>
-        </div>
+        <p>© <span id="year"></span> Your Name/Project. Contemplate freely.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
