@@ -1,4 +1,4 @@
-/* Original CSS provided by the user (subset for scrollbars, selection) */
+/* -------- Scrollbar and Selection (from your original CSS) -------- */
 ::-webkit-scrollbar {
   width: 0.625rem;
   height: 0.625rem;
@@ -8,7 +8,7 @@
   border-radius: 0.3125rem;
   box-shadow: inset 0.125rem 0.125rem 0.125rem rgba(255, 255, 255, 0.25),
     inset -0.125rem -0.125rem 0.125rem rgba(0, 0, 0, 0.25);
-  cursor: default;
+  cursor: default; /* Note: scrollbar thumb is not typically interactive this way */
 }
 ::-webkit-scrollbar-track {
   background: #333;
@@ -18,82 +18,97 @@
   color: #333;
 }
 
-/* Basic reset and full-screen setup */
+/* -------- Basic Page Setup for Landing Page -------- */
 html,
 body {
-  height: 100vh;
-  width: 100vw;
+  height: 100vh; /* Full viewport height */
+  /* height: 100dvh; /* Dynamic viewport height, good for mobile */
+  width: 100vw; /* Full viewport width */
   margin: 0;
-  overflow: hidden;
-  font-family: system-ui, sans-serif;
-  background-color: black; /* Fallback background */
+  overflow: hidden; /* Prevent scrollbars on the body itself */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #000000; /* Fallback background if canvas/shader fails */
 }
 
-/* Canvas styling for full-screen background animation */
-canvas {
-  position: fixed;
+/* -------- Canvas Styling (for the WebGL shader background) -------- */
+canvas#canvas { /* Added ID for specificity if needed */
+  position: fixed; /* Fixed position to stay in background during any (unlikely) scroll */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Cover entire screen, may crop edges */
-  background: black; /* Fallback if shader doesn't load */
-  touch-action: none; /* Disable touch actions like pinch-zoom on canvas */
-  z-index: 0; /* Behind the center box */
+  object-fit: cover; /* Ensures canvas covers the entire screen, may crop edges */
+  background: #050505; /* Dark background for canvas area before shader loads */
+  touch-action: none; /* Useful for preventing default touch behaviors on the canvas */
+  z-index: 0; /* Place canvas behind other content (like the centerBox) */
 }
 
-/* Styles for the central "LET'S BEGIN" box */
-#centerBox {
+/* -------- Styling for the "LET'S BEGIN" button/box -------- */
+a#centerBox { /* Using 'a' as it's a link, with ID for specificity */
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the box */
-    background-color: rgba(20, 20, 20, 0.85); /* Dark, semi-transparent background */
-    color: #e0e0e0; /* Light grey text color */
-    padding: 30px 60px;
-    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    padding: 20px 45px; /* Adjusted padding for a slightly larger button */
+    background-color: rgba(30, 30, 30, 0.85); /* Dark, slightly transparent */
+    border: 1px solid rgba(80, 80, 80, 0.7);
+    border-radius: 10px; /* Slightly more rounded */
     text-align: center;
+    text-decoration: none; /* Remove underline from link */
     z-index: 10; /* Ensure it's above the canvas */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean font */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); /* Subtle shadow */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Faint border */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
-#centerBox h1 {
+a#centerBox h1 {
     margin: 0;
-    font-size: 2.8rem; /* Adjust size as needed */
-    font-weight: 300; /* Lighter font weight for a modern look */
-    letter-spacing: 1.5px;
+    font-size: 2.2em; /* Slightly larger text */
+    color: #e0e0e0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500; /* Adjusted font weight */
 }
 
-/* Hide original CodePen UI elements that are not needed for this landing page */
-#codeEditor,
-#error,
-#indicator,
-#controls,
-.overlay { /* .overlay is dynamically added by JS for errors */
-  display: none !important;
+a#centerBox:hover {
+    background-color: rgba(50, 50, 50, 0.95);
+    transform: translate(-50%, -50%) scale(1.03);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6); /* Enhanced hover shadow */
 }
 
-/* The rest of the original CSS - mostly affects hidden elements but kept for completeness */
-/* If these elements were visible, these styles would apply. */
-.editor,
-.overlay, /* This specific .overlay is handled above with display:none */
-#error {
-  /* background: repeating-linear-gradient(0deg, #000a, #1119, #000a .25rem); */
+/* -------- Hide original CodePen UI elements not needed for the landing page -------- */
+textarea#codeEditor,
+pre#error,
+div#indicator,
+div#controls,
+.overlay { /* .overlay might be dynamically added by your script.js for errors */
+  display: none !important; /* Use !important to ensure override if other styles conflict */
+  visibility: hidden;
+}
+
+
+/* -------- Styles for elements that are NOW HIDDEN (from your original CSS) -------- */
+/* These styles will not have a visible effect on the elements they target because */
+/* those elements are set to 'display: none'. They are kept for completeness if you ever */
+/* decide to show these elements again and want to retain their original styling. */
+
+/*
+.editor, #error {
   padding: 1em;
 }
+
 .editor {
   color: #fefefe;
   tab-size: 2;
   border: none;
   resize: none;
 }
+
 .editor:focus {
   outline: none;
 }
-.controls {
-  /* Styles for the hidden controls container */
+
+#controls .controls { // More specific selector if #controls was visible
   position: relative;
   display: flex;
   gap: 1.5em;
@@ -101,8 +116,9 @@ canvas {
   background: #1111;
   border-radius: 4px;
 }
-.controls::before,
-.controls::after {
+
+#controls .controls::before,
+#controls .controls::after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -111,42 +127,51 @@ canvas {
   border-radius: inherit;
   opacity: 0;
 }
-.controls::before {
+
+#controls .controls::before {
   background: #aef;
   animation: pulse 2s infinite;
 }
-.controls::after {
+
+#controls .controls::after {
   background: #fefefe66;
   transition: transform 200ms ease-in-out;
 }
-.controls:hover::before,
-.controls:hover::after {
+
+#controls .controls:hover::before,
+#controls .controls:hover::after {
   opacity: 1;
 }
-.controls:hover::before {
+
+#controls .controls:hover::before {
   transform: scale(.98);
   filter: blur(2px);
 }
-.controls:hover::after {
+
+#controls .controls:hover::after {
   transform: scale(1.025, 1.1);
 }
-.controls:hover {
+
+#controls .controls:hover {
   background: #111f;
 }
+
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.0125); }
   100% { transform: scale(1); }
 }
-/* .hidden class is used by JS. Our !important on IDs will override this for the specific elements */
-.hidden {
-  /* display: none !important; */
+
+.hidden { // JS might use this class, but our specific ID selectors will override for hidden elements
+  // display: none !important;
 }
-.opaque { /* For error messages, which are hidden */
+
+.opaque { // For error messages, which are hidden
   opacity: 1 !important;
-  /* background: #111 !important; */
+  // background: #111 !important;
 }
-input { /* For inputs inside #controls, which are hidden */
+
+div#controls input { // Styles for inputs within the hidden #controls div
   all: unset;
   opacity: .2;
   filter: saturate(0) invert(1);
@@ -154,16 +179,20 @@ input { /* For inputs inside #controls, which are hidden */
   transition: opacity 200ms ease-in-out;
   padding: .25em .5em;
 }
-input:hover {
+
+div#controls input:hover {
   opacity: 1;
 }
-.icon { /* For icons inside #controls, which are hidden */
+
+div#controls .icon { // Styles for icons within the hidden #controls div
   text-align: center;
   line-height: 1;
 }
-#btnToggleView { width: 1.25em; }
-#btnToggleView::after { content: '👁'; }
-#btnToggleView:checked::after { content: '✏️'; }
-#btnToggleResolution::after { content: '1️⃣'; }
-#btnToggleResolution:checked::after { content: '2️⃣'; }
-#btnReset::after { content: '⏮️'; }
+
+div#controls #btnToggleView { width: 1.25em; }
+div#controls #btnToggleView::after { content: '👁'; }
+div#controls #btnToggleView:checked::after { content: '✏️'; }
+div#controls #btnToggleResolution::after { content: '1️⃣'; }
+div#controls #btnToggleResolution:checked::after { content: '2️⃣'; }
+div#controls #btnReset::after { content: '⏮️'; }
+*/
