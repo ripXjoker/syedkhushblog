@@ -1,81 +1,54 @@
-<canvas id="canvas"></canvas>
-<textarea id="codeEditor" class="editor" spellcheck="false" autocorrect="off" autocapitalize="off" translate="no" oninput="render()"></textarea>
-<pre id="error"></pre>
-<div id="indicator"></div>
-<div id="controls">
-  <div class="controls">
-    <input id="btnToggleView" class="icon" type="checkbox" name="toggleView" onclick="toggleView()">
-    <input id="btnToggleResolution" class="icon" type="checkbox" name="toggleResolution" onchange="toggleResolution()">
-    <input id="btnReset" class="icon" type="checkbox" name="reset" onclick="reset()">
-  </div>
-</div>
-<script type="x-shader/x-fragment">#version 300 es
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>మీ తెలుగు సైట్ పేరు (Your Telugu Site Title) - syedkhush.com</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Consider adding a Telugu font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">సైట్ పేరు (Site Name)</a></h1>
+            <nav>
+                <a href="/">హోమ్ (Home)</a>
+                <a href="/archive.html">ఆర్కైవ్ (Archive)</a>
+                <a href="/about.html">గురించి (About)</a>
+            </nav>
+        </div>
+    </header>
 
-/*********
-* made by Matthias Hurrle (@atzedent)
-*
-*	To explore strange new worlds, to seek out new life
-*	and new civilizations, to boldly go where no man has
-*	gone before.
-*/
-precision highp float;
-out vec4 O;
-uniform vec2 resolution;
-uniform float time;
-uniform sampler2D pebbles;
-#define FC gl_FragCoord.xy
-#define T time
-#define R resolution
-#define MN min(R.x,R.y)
-// Returns a pseudo random number for a given point (white noise)
-float rnd(vec2 p) {
-  p=fract(p*vec2(12.9898,78.233));
-  p+=dot(p,p+34.56);
-  return fract(p.x*p.y);
-}
-// Returns a pseudo random number for a given point (value noise)
-float noise(in vec2 p) {
-  vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
-  float
-  a=rnd(i),
-  b=rnd(i+vec2(1,0)),
-  c=rnd(i+vec2(0,1)),
-  d=rnd(i+1.);
-  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
-}
-// Returns a pseudo random number for a given point (fractal noise)
-float fbm(vec2 p) {
-  float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
-  for (int i=0; i<5; i++) {
-    t+=a*noise(p);
-    p*=2.*m;
-    a*=.5;
-  }
-  return t;
-}
-float clouds(vec2 p) {
-	float d=1., t=.0;
-	for (float i=.0; i<3.; i++) {
-		float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
-		t=mix(t,d,a);
-		d=a;
-		p*=2./(i+1.);
-	}
-	return t;
-}
-void main(void) {
-	vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
-	vec3 col=vec3(0);
-	float bg=clouds(vec2(st.x+T*.5,-st.y));
-	uv*=1.-.3*(sin(T*.2)*.5+.5);
-	for (float i=1.; i<12.; i++) {
-		uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
-		vec2 p=uv;
-		float d=length(p);
-		col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
-		float b=noise(i+p+bg*1.731);
-		col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
-		col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
-	}
-	O=vec4(col,1);
-}</script>
+    <main class="container">
+        <article>
+            <h2><a href="/your-post-url.html">మీ మొదటి తెలుగు పోస్ట్ శీర్షిక (Your First Telugu Post Title)</a></h2>
+            <p class="meta">ప్రచురించిన తేదీ: సెప్టెంబర్ 26, 2023 (Published Date: September 26, 2023)</p>
+
+            <p>ఇక్కడ మీ మొదటి పేరా తెలుగులో వస్తుంది. వెయిట్ బట్ వై లాగా, మీరు లోతైన విశ్లేషణలతో, హాస్యంతో, మరియు ఆసక్తికరమైన విషయాలతో నింపవచ్చు. (Your first paragraph in Telugu goes here. Like Wait But Why, you can fill it with deep analysis, humor, and interesting topics.)</p>
+
+            <p>రెండవ పేరా. దృష్టాంతాలను జోడించడం మర్చిపోవద్దు! (Second paragraph. Don't forget to add illustrations!)</p>
+
+            <figure>
+                <img src="images/your-stick-figure-image.png" alt="తెలుగులో వివరణాత్మక చిత్రం (Descriptive image in Telugu)">
+                <figcaption>చిత్రం శీర్షిక తెలుగులో (Image caption in Telugu)</figcaption>
+            </figure>
+
+            <p>మరింత కంటెంట్ ఇక్కడ... (More content here...)</p>
+
+            <p>సాధారణంగా WBW పోస్ట్‌లు చాలా పొడవుగా ఉంటాయి, కాబట్టి మీరు చాలా కంటెంట్‌ను సిద్ధం చేసుకోవాలి. (Typically WBW posts are very long, so you'll need to prepare a lot of content.)</p>
+        </article>
+
+        <!-- Add more articles or pagination here -->
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 మీ పేరు లేదా సైట్ పేరు (Your Name or Site Name). అన్ని హక్కులు ప్రత్యేకించబడ్డాయి.</p>
+        </div>
+    </footer>
+</body>
+</html>
