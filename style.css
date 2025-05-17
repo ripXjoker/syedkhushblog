@@ -94,7 +94,7 @@ body { font-family: var(--font-primary); line-height: 1.65; background-color: va
 .site-header .subtitle { font-family: var(--font-primary); font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 400; color: var(--current-text-secondary); max-width: 60ch; margin: 0 auto var(--space-md); }
 
 .butterfly-animation-area { display: flex; flex-direction: column; align-items: center; }
-.header-action-button { background-color: var(--current-button-bg); color: var(--current-button-text); border: none; padding: 0.75em 1.5em; border-radius: 8px; cursor: pointer; font-family: var(--font-primary); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease, transform 0.1s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: var(--space-xs); /* Added small margin */ }
+.header-action-button { background-color: var(--current-button-bg); color: var(--current-button-text); border: none; padding: 0.75em 1.5em; border-radius: 8px; cursor: pointer; font-family: var(--font-primary); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease, transform 0.1s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: var(--space-xs); }
 .header-action-button:hover { background-color: var(--current-button-hover-bg); transform: translateY(-1px); }
 
 .site-footer { text-align: center; padding: var(--space-lg) var(--space-md); background-color: var(--current-footer-bg); margin-top: var(--space-xxl); font-size: 0.9rem; color: var(--current-text-secondary); border-top: 1px solid var(--current-border-color); transition: all 0.3s ease; }
@@ -137,8 +137,7 @@ body { font-family: var(--font-primary); line-height: 1.65; background-color: va
 @media (max-width: 768px) { .site-header h1 { font-size: 2.2rem; } .site-header .subtitle { font-size: 1.1rem; } .section-header h2 { font-size: 1.8rem; } .thesis-container, .toc-container { padding: var(--space-lg) var(--space-md); margin: var(--space-lg) var(--space-sm); border-radius: 12px; } #theme-toggle-btn { top: var(--space-sm); right: var(--space-sm); } .butterfly-animation-area { margin-top: var(--space-md); } }
 @media (max-width: 480px) { html { font-size: 93.75%; } .site-header h1 { font-size: 2rem; } .site-header .subtitle { font-size: 1rem; } .section-header h2 { font-size: 1.6rem; } }
 
-/* --- MODIFIED Butterfly Animation CSS --- */
-/* Keyframes remain the same */
+/* --- CORRECTED & SCALED Butterfly Animation CSS --- */
 @keyframes rotating {
   0% { transform: rotate3d(0, 0, 0, 0deg); }
   100% { transform: rotate3d(0, 1, 0, 720deg); }
@@ -148,93 +147,97 @@ body { font-family: var(--font-primary); line-height: 1.65; background-color: va
 }
 @keyframes fluttering {
   0%, 25%, 50%, 75%, 100% { transform: translate3d(0, 0, 0); }
-  10%, 60% { transform: translate3d(0, 10px, 0); } /* Reduced flutter height */
-  30%, 80% { transform: translate3d(0, 5px, 0); }  /* Reduced flutter height */
+  10%, 60% { transform: translate3d(0, 10px, 0); }
+  30%, 80% { transform: translate3d(0, 5px, 0); }
 }
+/* CORRECTED Wing Flap Keyframes */
 @keyframes left-wing-flap {
-  0% { transform: rotate3d(0, 1, 0, 60deg); } /* Simpler transform */
-  50% { transform: rotate3d(0, 1, 0, -70deg); }
-  100% { transform: rotate3d(0, 1, 0, 60deg); }
+  0% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
 }
 @keyframes right-wing-flap {
-  0% { transform: rotate3d(0, 1, 0, 60deg); } /* Simpler transform, scaleX is handled on element */
-  50% { transform: rotate3d(0, 1, 0, -70deg); }
-  100% { transform: rotate3d(0, 1, 0, 60deg); }
+  0% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
 }
 
-/* --- MODIFIED Butterfly Styles for Scalability --- */
 .butterfly_container {
-  width: 70px;  /* << NEW SMALLER SIZE */
-  height: 70px; /* << NEW SMALLER SIZE */
-  position: relative; /* Crucial for anchoring absolute children */
+  width: 70px;
+  height: 70px;
+  position: relative;
   margin-bottom: var(--space-sm);
   transform-style: preserve-3d;
 }
-
-.butterfly_container var { /* This is the main rotator/translator */
+.butterfly_container var {
   position: absolute;
-  width: 100%; /* Fill the container */
-  height: 100%;/* Fill the container */
-  left: 0; /* Position at top-left of parent */
+  width: 100%;
+  height: 100%;
+  left: 0;
   top: 0;
-  margin: 0; /* Remove fixed margins */
+  margin: 0;
   transform-style: preserve-3d;
 }
 .butterfly_container var.rotate3d {
-  /* Original rotation of the whole butterfly */
   transform: rotate3d(1, 0.5, 0, 50deg);
 }
 .butterfly_container var.translate3d {
   animation: fluttering 10s ease-in-out infinite;
 }
-
-.butterfly_container figure.butterfly { /* Holds the two wing SVGs */
+.butterfly_container figure.butterfly {
   position: absolute;
-  width: 100%; /* Fill the 'var' container */
-  height: 100%;/* Fill the 'var' container */
+  width: 100%;
+  height: 100%;
   left: 0;
   top: 0;
-  margin: 0; /* Remove fixed margins */
+  margin: 0;
   transform-style: preserve-3d;
-  transform-origin: 50% 50%; /* Center of the butterfly figure */
+  transform-origin: 50% 50%;
 }
-
 .butterfly_container figure.butterfly .wing {
   position: absolute;
-  width: 50%;  /* Each wing is half the figure's width */
-  height: 100%; /* Full height of the figure */
+  width: 50%;
+  height: 100%;
   top: 0;
   transform-style: preserve-3d;
-  /* The SVG inside will scale based on its viewBox */
 }
-
 .butterfly_container figure.butterfly .wing.left {
-  left: 0; /* Position on the left half */
-  transform-origin: 100% 50%; /* Hinge on its own right edge (towards the body) */
+  left: 0;
+  transform-origin: 100% 50%;
+  /* Initial pose can be set here if needed, or rely on animation start */
+  /* transform: scaleX(1) rotate3d(0, 1, 0, 45deg); */
   animation: left-wing-flap 1s ease-in-out infinite;
 }
-
 .butterfly_container figure.butterfly .wing.right {
-  left: 50%; /* Position on the right half */
-  transform: scaleX(-1); /* Flip the right wing SVG */
-  transform-origin: 0% 50%; /* Hinge on its own left edge (towards the body) */
+  left: 50%;
+  transform: scaleX(-1); /* Flips the container for the right wing */
+  transform-origin: 0% 50%; /* Hinge on the now body-side edge */
   animation: right-wing-flap 1s ease-in-out infinite;
 }
-
-.butterfly_container figure.butterfly .wing svg { /* Target the actual SVG elements */
-    display: block; /* Remove extra space */
-    width: 100%;    /* Make SVG fill its .wing container */
-    height: 100%;   /* Make SVG fill its .wing container */
+.butterfly_container figure.butterfly .wing svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
-
 .butterfly_container figure.butterfly .wing use {
   display: block;
   transform-style: preserve-3d;
 }
-
-.svg-defs { /* For the <svg> block holding <defs> */
+.svg-defs {
   position: absolute;
   height: 0;
   width: 0;
-  overflow: hidden; /* Important */
+  overflow: hidden;
 }
