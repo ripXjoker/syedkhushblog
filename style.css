@@ -1,68 +1,224 @@
-/* ... (your existing CSS) ... */
-
-/* Projects Container */
-.projects-container {
-  width: 100%;
-  position: relative;
-  z-index: 10;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 20px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* Inspired by https://codepen.io/htgmanics/pen/nJwdl */
+@keyframes rotating {
+  0% {
+    -webkit-transform: rotate3d(0, 0, 0, 0deg);
+    -moz-transform: rotate3d(0, 0, 0, 0deg);
+    -ms-transform: rotate3d(0, 0, 0, 0deg);
+    -o-transform: rotate3d(0, 0, 0, 0deg);
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 720deg);
+    -moz-transform: rotate3d(0, 1, 0, 720deg);
+    -ms-transform: rotate3d(0, 1, 0, 720deg);
+    -o-transform: rotate3d(0, 1, 0, 720deg);
+    transform: rotate3d(0, 1, 0, 720deg);
+  }
 }
-.projects-container::-webkit-scrollbar {
-  display: none;
+@keyframes rotatingY {
+  100% {
+    -webkit-transform: rotateY(-360deg);
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    -o-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+  }
+}
+@keyframes fluttering {
+  0%,
+  25%,
+  50%,
+  75%,
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  10%,
+  60% {
+    -webkit-transform: translate3d(0, 150px, 0);
+    -moz-transform: translate3d(0, 150px, 0);
+    -ms-transform: translate3d(0, 150px, 0);
+    -o-transform: translate3d(0, 150px, 0);
+    transform: translate3d(0, 150px, 0);
+  }
+  30%,
+  80% {
+    -webkit-transform: translate3d(0, 50px, 0);
+    -moz-transform: translate3d(0, 50px, 0);
+    -ms-transform: translate3d(0, 50px, 0);
+    -o-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
+  }
+}
+@keyframes left-wing-flap {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
+  50% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
+}
+@keyframes right-wing-flap {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+  }
+  50% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+  }
 }
 
-/* Style for the link wrapper to remove default link appearance */
-.project-item-link {
-  text-decoration: none; /* Removes underline from link */
-  color: inherit; /* Inherits text color from parent */
-  display: block; /* Makes the link take up the full width for easier clicking */
+.butterfly_container {
+  width: 100px;
+  height: 100px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
-
-/* Project Item Styles (this is now inside the link) */
-.project-item {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(248, 245, 242, 0.1);
-  cursor: pointer; /* This cursor will now be on the div, but the link makes it clickable */
-}
-
-/* Project title and year */
-.project-title,
-.project-year {
-  font-size: 1.8rem;
-  position: relative;
-  z-index: 2;
-  mix-blend-mode: exclusion;
-}
-
-/* List view hover animation - this applies to the .project-item div */
-.project-item::before {
-  content: "";
+.butterfly_container var {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 0%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.butterfly_container var.rotate3d {
+  -webkit-transform: rotate3d(1, 0.5, 0, 50deg);
+  -moz-transform: rotate3d(1, 0.5, 0, 50deg);
+  -ms-transform: rotate3d(1, 0.5, 0, 50deg);
+  -o-transform: rotate3d(1, 0.5, 0, 50deg);
+  transform: rotate3d(1, 0.5, 0, 50deg);
+}
+.butterfly_container var.translate3d {
+  -webkit-animation: fluttering 10s ease-in-out infinite;
+  -moz-animation: fluttering 10s ease-in-out infinite;
+  -ms-animation: fluttering 10s ease-in-out infinite;
+  -o-animation: fluttering 10s ease-in-out infinite;
+  animation: fluttering 10s ease-in-out infinite;
+}
+.butterfly_container figure.butterfly {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.butterfly_container figure.butterfly .wing {
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 0, 45deg);
+  -moz-transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 0, 45deg);
+  -ms-transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 0, 45deg);
+  -o-transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 0, 45deg);
+  transform: translate3d(0, 0, 0) rotate3d(1, 0.5, 0, 45deg);
+}
+.butterfly_container figure.butterfly .wing.right {
+  -webkit-transform-origin: 50px 50px;
+  -moz-transform-origin: 50px 50px;
+  -ms-transform-origin: 50px 50px;
+  -o-transform-origin: 50px 50px;
+  transform-origin: 50px 50px;
+  -webkit-transform: translate3d(0px, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  -moz-transform: translate3d(0px, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  -ms-transform: translate3d(0px, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  -o-transform: translate3d(0px, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  transform: translate3d(0px, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  -webkit-animation: right-wing-flap 1s ease-in-out infinite;
+  -moz-animation: right-wing-flap 1s ease-in-out infinite;
+  -ms-animation: right-wing-flap 1s ease-in-out infinite;
+  -o-animation: right-wing-flap 1s ease-in-out infinite;
+  animation: right-wing-flap 1s ease-in-out infinite;
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+.butterfly_container figure.butterfly .wing.left {
+  -webkit-transform-origin: 50px 50px;
+  -moz-transform-origin: 50px 50px;
+  -ms-transform-origin: 50px 50px;
+  -o-transform-origin: 50px 50px;
+  transform-origin: 50px 50px;
+  -webkit-animation: left-wing-flap 1s ease-in-out infinite;
+  -moz-animation: left-wing-flap 1s ease-in-out infinite;
+  -ms-animation: left-wing-flap 1s ease-in-out infinite;
+  -o-animation: left-wing-flap 1s ease-in-out infinite;
+  animation: left-wing-flap 1s ease-in-out infinite;
+}
+.butterfly_container figure.butterfly .wing use {
+  display: block;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  fill: url(#image);
+}
+
+.svg-defs {
+  position: absolute;
   height: 0;
-  background-color: var(--warm-off-white);
-  z-index: 1;
-  pointer-events: none;
-  transition: height 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 0s;
+  width: 0;
 }
-
-/* The hover effect on the link should trigger the ::before on the inner div */
-.project-item-link:hover .project-item::before {
-  height: 100%;
-}
-
-.project-item-link:not(:hover) .project-item::before {
-  transition-duration: 0.8s;
-}
-
-
-/* ... (rest of your existing CSS: responsive styles etc.) ... */
