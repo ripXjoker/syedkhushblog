@@ -9,15 +9,15 @@
 
 :root {
     /* Light Theme (Inspired by Apple) */
-    --bg-color-light: #fefefe; /* Off-white, very light */
-    --text-color-light: #1d1d1f; /* Apple's typical dark text */
-    --text-secondary-light: #58585c; /* Slightly lighter text for subtitles, meta */
-    --accent-color-light: #007aff; /* Apple Blue */
+    --bg-color-light: #fefefe;
+    --text-color-light: #1d1d1f;
+    --text-secondary-light: #58585c;
+    --accent-color-light: #007aff;
     --accent-hover-light: #005ec4;
-    --container-bg-light: #ffffff; /* Pure white for content cards/sections */
-    --border-color-light: #e0e0e0; /* Subtle borders */
-    --header-bg-light: transparent; /* Often transparent or very light */
-    --footer-bg-light: #f5f5f7; /* Light gray footer */
+    --container-bg-light: #ffffff;
+    --border-color-light: #e0e0e0;
+    --header-bg-light: transparent;
+    --footer-bg-light: #f5f5f7;
     --button-bg-light: var(--accent-color-light);
     --button-text-light: #fff;
     --button-hover-bg-light: var(--accent-hover-light);
@@ -26,12 +26,12 @@
     --blockquote-border-light: var(--accent-color-light);
 
     /* Dark Theme (Inspired by Apple) */
-    --bg-color-dark: #0d0d0d; /* Very dark charcoal, near black */
-    --text-color-dark: #f5f5f7; /* Apple's typical light text */
+    --bg-color-dark: #0d0d0d;
+    --text-color-dark: #f5f5f7;
     --text-secondary-dark: #a0a0a5;
-    --accent-color-dark: #0a84ff; /* Lighter Apple Blue for dark mode */
+    --accent-color-dark: #0a84ff;
     --accent-hover-dark: #0060d0;
-    --container-bg-dark: #1c1c1e; /* Darker than bg, but not black */
+    --container-bg-dark: #1c1c1e;
     --border-color-dark: #38383a;
     --header-bg-dark: transparent;
     --footer-bg-dark: #161618;
@@ -42,7 +42,7 @@
     --blockquote-bg-dark: #2c2c2e;
     --blockquote-border-dark: var(--accent-color-dark);
 
-    /* Current theme variables (will be overridden by .dark-theme) */
+    /* Current theme variables */
     --current-bg-color: var(--bg-color-light);
     --current-text-color: var(--text-color-light);
     --current-text-secondary: var(--text-secondary-light);
@@ -59,16 +59,8 @@
     --current-blockquote-bg: var(--blockquote-bg-light);
     --current-blockquote-border: var(--blockquote-border-light);
 
-    /* Font Families */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
-    /* Spacing */
-    --space-xs: 0.5rem;
-    --space-sm: 1rem;
-    --space-md: 1.5rem;
-    --space-lg: 2rem;
-    --space-xl: 3rem;
-    --space-xxl: 4rem;
+    --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-xxl: 4rem;
 }
 
 .dark-theme {
@@ -89,319 +81,64 @@
     --current-blockquote-border: var(--blockquote-border-dark);
 }
 
-html {
-    scroll-behavior: smooth;
-    font-size: 100%; /* 16px base */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+html { scroll-behavior: smooth; font-size: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: var(--font-primary); line-height: 1.65; background-color: var(--current-bg-color); color: var(--current-text-color); transition: background-color 0.3s ease, color 0.3s ease; padding-top: var(--space-md); }
 
-body {
-    font-family: var(--font-primary);
-    line-height: 1.65;
-    background-color: var(--current-bg-color);
-    color: var(--current-text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    padding-top: var(--space-md);
-}
+#theme-toggle-btn { position: fixed; top: var(--space-md); right: var(--space-md); background-color: var(--current-container-bg); color: var(--current-text-secondary); border: 1px solid var(--current-border-color); padding: 0.6rem 0.8rem; font-size: 1.2rem; border-radius: 50%; cursor: pointer; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+#theme-toggle-btn:hover { color: var(--current-accent-color); border-color: var(--current-accent-color); transform: scale(1.05); }
 
-/* --- Theme Toggle Button --- */
-#theme-toggle-btn {
-    position: fixed;
-    top: var(--space-md);
-    right: var(--space-md);
-    background-color: var(--current-container-bg);
-    color: var(--current-text-secondary);
-    border: 1px solid var(--current-border-color);
-    padding: 0.6rem 0.8rem;
-    font-size: 1.2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
-}
-#theme-toggle-btn:hover {
-    color: var(--current-accent-color);
-    border-color: var(--current-accent-color);
-    transform: scale(1.05);
-}
+.site-header { text-align: center; padding: var(--space-xl) var(--space-md) var(--space-xxl); background-color: var(--current-header-bg); transition: background-color 0.3s ease; }
+.header-content-wrapper { display: flex; flex-direction: column; align-items: center; gap: var(--space-lg); max-width: 900px; margin: 0 auto; }
+.title-area { text-align: center; }
+.site-header h1 { font-family: var(--font-primary); font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 700; margin-bottom: var(--space-xs); color: var(--current-text-color); letter-spacing: -0.02em; }
+.site-header .subtitle { font-family: var(--font-primary); font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 400; color: var(--current-text-secondary); max-width: 60ch; margin: 0 auto var(--space-md); }
 
-/* --- Header & Footer --- */
-.site-header {
-    text-align: center;
-    padding: var(--space-xl) var(--space-md) var(--space-xxl);
-    background-color: var(--current-header-bg);
-    transition: background-color 0.3s ease;
-}
-.header-content-wrapper {
-    display: flex;
-    flex-direction: column; /* Stack title and butterfly by default */
-    align-items: center;
-    gap: var(--space-lg);
-    max-width: 900px; /* Constrain header content slightly less than main */
-    margin: 0 auto;
-}
-.title-area {
-    text-align: center;
-}
-.site-header h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 5vw, 3.8rem); /* Responsive font size */
-    font-weight: 700;
-    margin-bottom: var(--space-xs);
-    color: var(--current-text-color);
-    letter-spacing: -0.02em;
-}
-.site-header .subtitle {
-    font-family: var(--font-primary);
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    font-weight: 400;
-    color: var(--current-text-secondary);
-    max-width: 60ch;
-    margin: 0 auto var(--space-md);
-}
-.butterfly-animation-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.butterfly_container {
-  width: 100px;
-  height: 100px;
-  margin-bottom: var(--space-sm);
-}
-.butterfly_container var { width: 100px; height: 100px; margin-left: -50%; margin-top: -50%;}
-.butterfly_container figure.butterfly { width: 100px; height: 100px; margin-left: -50%; margin-top: -50%;}
+.butterfly-animation-area { display: flex; flex-direction: column; align-items: center; }
+.header-action-button { background-color: var(--current-button-bg); color: var(--current-button-text); border: none; padding: 0.75em 1.5em; border-radius: 8px; cursor: pointer; font-family: var(--font-primary); font-weight: 500; font-size: 0.9rem; transition: background-color 0.2s ease, transform 0.1s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: var(--space-xs); /* Added small margin */ }
+.header-action-button:hover { background-color: var(--current-button-hover-bg); transform: translateY(-1px); }
 
-.header-action-button {
-    background-color: var(--current-button-bg);
-    color: var(--current-button-text);
-    border: none;
-    padding: 0.75em 1.5em;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: var(--font-primary);
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.header-action-button:hover {
-    background-color: var(--current-button-hover-bg);
-    transform: translateY(-1px);
-}
-
-.site-footer {
-    text-align: center;
-    padding: var(--space-lg) var(--space-md);
-    background-color: var(--current-footer-bg);
-    margin-top: var(--space-xxl);
-    font-size: 0.9rem;
-    color: var(--current-text-secondary);
-    border-top: 1px solid var(--current-border-color);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
+.site-footer { text-align: center; padding: var(--space-lg) var(--space-md); background-color: var(--current-footer-bg); margin-top: var(--space-xxl); font-size: 0.9rem; color: var(--current-text-secondary); border-top: 1px solid var(--current-border-color); transition: all 0.3s ease; }
 .site-footer p { margin-bottom: var(--space-xs); }
 
-/* --- Table of Contents (TOC) --- */
-.toc-container {
-    max-width: 800px;
-    margin: var(--space-xxl) auto;
-    padding: var(--space-lg);
-    background-color: var(--current-toc-bg);
-    border-radius: 12px;
-    border: 1px solid var(--current-border-color);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.toc-container h2 {
-    font-family: var(--font-primary);
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--current-border-color);
-}
-.toc-container ul {
-    list-style: none;
-    padding-left: 0;
-}
-.toc-container li {
-    margin-bottom: var(--space-sm);
-}
-.toc-container a {
-    text-decoration: none;
-    color: var(--current-accent-color);
-    font-weight: 500;
-    transition: color 0.2s ease, padding-left 0.2s ease;
-    display: block;
-    padding: var(--space-xs) 0;
-}
-.toc-container a:hover {
-    color: var(--current-accent-hover);
-    padding-left: var(--space-xs); /* Subtle indent on hover */
-}
+.toc-container { max-width: 800px; margin: var(--space-xxl) auto; padding: var(--space-lg); background-color: var(--current-toc-bg); border-radius: 12px; border: 1px solid var(--current-border-color); box-shadow: 0 8px 24px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+.toc-container h2 { font-family: var(--font-primary); font-size: 1.6rem; font-weight: 600; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--current-border-color); }
+.toc-container ul { list-style: none; padding-left: 0; }
+.toc-container li { margin-bottom: var(--space-sm); }
+.toc-container a { text-decoration: none; color: var(--current-accent-color); font-weight: 500; transition: color 0.2s ease, padding-left 0.2s ease; display: block; padding: var(--space-xs) 0; }
+.toc-container a:hover { color: var(--current-accent-hover); padding-left: var(--space-xs); }
 
-/* --- Main Thesis Container & Sections --- */
-.thesis-container {
-    max-width: 800px; /* Optimal reading width */
-    margin: var(--space-xxl) auto;
-    padding: var(--space-xl) var(--space-lg);
-    background-color: var(--current-container-bg);
-    border-radius: 16px; /* More rounded corners */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-/* Optional: Add border if container bg is same as body bg */
-/* .dark-theme .thesis-container, .light-theme .thesis-container { border: 1px solid var(--current-border-color); } */
+.thesis-container { max-width: 800px; margin: var(--space-xxl) auto; padding: var(--space-xl) var(--space-lg); background-color: var(--current-container-bg); border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.07); transition: all 0.3s ease; }
+.thesis-section { margin-bottom: var(--space-xxl); padding-bottom: var(--space-lg); border-bottom: 1px solid var(--current-border-color); transition: border-color 0.3s ease; }
+.thesis-section:last-child { border-bottom: none; margin-bottom: 0; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); cursor: pointer; }
+.section-header h2 { font-family: var(--font-primary); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 600; color: var(--current-text-color); letter-spacing: -0.01em; }
 
-
-.thesis-section {
-    margin-bottom: var(--space-xxl);
-    padding-bottom: var(--space-lg);
-    border-bottom: 1px solid var(--current-border-color);
-    transition: border-color 0.3s ease;
-}
-.thesis-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-md);
-    cursor: pointer;
-}
-.section-header h2 {
-    font-family: var(--font-primary);
-    font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive heading size */
-    font-weight: 600;
-    color: var(--current-text-color);
-    letter-spacing: -0.01em;
-}
-
-/* --- Section Content & Buttons --- */
-.section-content-wrapper {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease-in-out; /* Smoother ease */
-}
-.section-content-wrapper.expanded {
-    max-height: 5000px; /* Keep large */
-    opacity: 1;
-}
+.section-content-wrapper { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease-in-out; }
+.section-content-wrapper.expanded { max-height: 5000px; opacity: 1; }
 .section-content-wrapper.brief .elongated-content { display: none; }
 .section-content-wrapper.brief.show-elongated .brief-content { display: none; }
 .section-content-wrapper.brief.show-elongated .elongated-content { display: block; }
 
-.toggle-section-btn, .read-more-intro {
-    background-color: rgba(0,0,0,0.05); /* Subtle background */
-    color: var(--current-text-secondary);
-    border: 1px solid transparent; /* Placeholder for potential border on hover/focus */
-    padding: 0.6em 1.2em;
-    border-radius: 25px;
-    cursor: pointer;
-    font-family: var(--font-primary);
-    font-weight: 500;
-    text-transform: none; /* Less shouty */
-    letter-spacing: 0;
-    font-size: 0.875rem;
-    transition: all 0.2s ease;
-}
-.dark-theme .toggle-section-btn, .dark-theme .read-more-intro {
-    background-color: rgba(255,255,255,0.1);
-}
-.toggle-section-btn:hover, .read-more-intro:hover {
-    background-color: var(--current-accent-color);
-    color: var(--current-button-text); /* white or specified button text */
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.read-more-intro {
-    display: inline-block;
-    margin-top: var(--space-md);
-    background-color: var(--current-accent-color); /* Make "Read More" more prominent */
-    color: var(--current-button-text);
-}
-.read-more-intro:hover {
-    background-color: var(--current-accent-hover);
-}
+.toggle-section-btn, .read-more-intro { background-color: rgba(0,0,0,0.05); color: var(--current-text-secondary); border: 1px solid transparent; padding: 0.6em 1.2em; border-radius: 25px; cursor: pointer; font-family: var(--font-primary); font-weight: 500; text-transform: none; letter-spacing: 0; font-size: 0.875rem; transition: all 0.2s ease; }
+.dark-theme .toggle-section-btn, .dark-theme .read-more-intro { background-color: rgba(255,255,255,0.1); }
+.toggle-section-btn:hover, .read-more-intro:hover { background-color: var(--current-accent-color); color: var(--current-button-text); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.read-more-intro { display: inline-block; margin-top: var(--space-md); background-color: var(--current-accent-color); color: var(--current-button-text); }
+.read-more-intro:hover { background-color: var(--current-accent-hover); }
 
+.thesis-section p, .thesis-section li { margin-bottom: var(--space-md); font-size: 1.05rem; color: var(--current-text-secondary); }
+.thesis-section strong { font-weight: 600; color: var(--current-text-color); }
+.thesis-section ul { list-style-position: outside; padding-left: var(--space-md); }
+.thesis-section li { margin-bottom: var(--space-sm); padding-left: var(--space-xs); }
+.thesis-section li::marker { color: var(--current-accent-color); }
+.thesis-section blockquote { margin: var(--space-lg) 0; padding: var(--space-md) var(--space-lg); border-left: 4px solid var(--current-blockquote-border); background-color: var(--current-blockquote-bg); font-style: italic; color: var(--current-text-color); border-radius: 0 8px 8px 0; transition: all 0.3s ease; }
+.thesis-section blockquote p { margin-bottom: 0; font-size: 1.1rem; }
 
-/* --- Typography within Sections --- */
-.thesis-section p, .thesis-section li {
-    margin-bottom: var(--space-md);
-    font-size: 1.05rem; /* Approx 17px */
-    color: var(--current-text-secondary); /* Main text slightly less stark */
-}
-.thesis-section strong {
-    font-weight: 600;
-    color: var(--current-text-color); /* Strong text full color */
-}
-.thesis-section ul {
-    list-style-position: outside;
-    padding-left: var(--space-md);
-}
-.thesis-section li {
-    margin-bottom: var(--space-sm);
-    padding-left: var(--space-xs);
-}
-.thesis-section li::marker {
-    color: var(--current-accent-color);
-}
-.thesis-section blockquote {
-    margin: var(--space-lg) 0;
-    padding: var(--space-md) var(--space-lg);
-    border-left: 4px solid var(--current-blockquote-border);
-    background-color: var(--current-blockquote-bg);
-    font-style: italic;
-    color: var(--current-text-color);
-    border-radius: 0 8px 8px 0;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.thesis-section blockquote p {
-    margin-bottom: 0;
-    font-size: 1.1rem;
-}
+@media (max-width: 960px) { .header-content-wrapper { flex-direction: column; } .title-area { text-align: center; } }
+@media (max-width: 768px) { .site-header h1 { font-size: 2.2rem; } .site-header .subtitle { font-size: 1.1rem; } .section-header h2 { font-size: 1.8rem; } .thesis-container, .toc-container { padding: var(--space-lg) var(--space-md); margin: var(--space-lg) var(--space-sm); border-radius: 12px; } #theme-toggle-btn { top: var(--space-sm); right: var(--space-sm); } .butterfly-animation-area { margin-top: var(--space-md); } }
+@media (max-width: 480px) { html { font-size: 93.75%; } .site-header h1 { font-size: 2rem; } .site-header .subtitle { font-size: 1rem; } .section-header h2 { font-size: 1.6rem; } }
 
-/* --- Responsive Design --- */
-@media (max-width: 960px) {
-    .header-content-wrapper {
-        flex-direction: column;
-    }
-    .title-area { text-align: center; }
-}
-
-@media (max-width: 768px) {
-    .site-header h1 { font-size: 2.2rem; }
-    .site-header .subtitle { font-size: 1.1rem; }
-    .section-header h2 { font-size: 1.8rem; }
-    .thesis-container, .toc-container {
-        padding: var(--space-lg) var(--space-md);
-        margin: var(--space-lg) var(--space-sm);
-        border-radius: 12px;
-    }
-    #theme-toggle-btn {
-        top: var(--space-sm);
-        right: var(--space-sm);
-    }
-    .butterfly-animation-area { margin-top: var(--space-md); }
-}
-@media (max-width: 480px) {
-    html { font-size: 93.75%; } /* 15px base */
-    .site-header h1 { font-size: 2rem; }
-    .site-header .subtitle { font-size: 1rem; }
-    .section-header h2 { font-size: 1.6rem; }
-}
-
-
-/* --- Butterfly Animation CSS (APPEND THE FULL CSS YOU PROVIDED for the butterfly here) --- */
-/* Ensure you copy the FULL butterfly animation CSS from your original code or my previous response. */
-/* Example start (replace with your full butterfly CSS): */
+/* --- MODIFIED Butterfly Animation CSS --- */
+/* Keyframes remain the same */
 @keyframes rotating {
   0% { transform: rotate3d(0, 0, 0, 0deg); }
   100% { transform: rotate3d(0, 1, 0, 720deg); }
@@ -411,51 +148,93 @@ body {
 }
 @keyframes fluttering {
   0%, 25%, 50%, 75%, 100% { transform: translate3d(0, 0, 0); }
-  10%, 60% { transform: translate3d(0, 20px, 0); } /* Adjusted earlier */
-  30%, 80% { transform: translate3d(0, 10px, 0); } /* Adjusted earlier */
+  10%, 60% { transform: translate3d(0, 10px, 0); } /* Reduced flutter height */
+  30%, 80% { transform: translate3d(0, 5px, 0); }  /* Reduced flutter height */
 }
 @keyframes left-wing-flap {
-  0% { transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg); }
-  50% { transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg); }
-  100% { transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg); }
+  0% { transform: rotate3d(0, 1, 0, 60deg); } /* Simpler transform */
+  50% { transform: rotate3d(0, 1, 0, -70deg); }
+  100% { transform: rotate3d(0, 1, 0, 60deg); }
 }
 @keyframes right-wing-flap {
-  0% { transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg); }
-  50% { transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg); }
-  100% { transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg); }
+  0% { transform: rotate3d(0, 1, 0, 60deg); } /* Simpler transform, scaleX is handled on element */
+  50% { transform: rotate3d(0, 1, 0, -70deg); }
+  100% { transform: rotate3d(0, 1, 0, 60deg); }
 }
 
-.butterfly_container var.rotate3d { transform: rotate3d(1, 0.5, 0, 50deg); }
-.butterfly_container var.translate3d { animation: fluttering 10s ease-in-out infinite; }
-.butterfly_container figure.butterfly .wing {
-  position: absolute;
-  width: 50%; height: 100%;
+/* --- MODIFIED Butterfly Styles for Scalability --- */
+.butterfly_container {
+  width: 70px;  /* << NEW SMALLER SIZE */
+  height: 70px; /* << NEW SMALLER SIZE */
+  position: relative; /* Crucial for anchoring absolute children */
+  margin-bottom: var(--space-sm);
   transform-style: preserve-3d;
 }
-.butterfly_container figure.butterfly .wing.right {
-  transform-origin: 100% 50%;
-  transform: translate3d(50%, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
-  animation: right-wing-flap 1s ease-in-out infinite;
+
+.butterfly_container var { /* This is the main rotator/translator */
+  position: absolute;
+  width: 100%; /* Fill the container */
+  height: 100%;/* Fill the container */
+  left: 0; /* Position at top-left of parent */
+  top: 0;
+  margin: 0; /* Remove fixed margins */
+  transform-style: preserve-3d;
 }
+.butterfly_container var.rotate3d {
+  /* Original rotation of the whole butterfly */
+  transform: rotate3d(1, 0.5, 0, 50deg);
+}
+.butterfly_container var.translate3d {
+  animation: fluttering 10s ease-in-out infinite;
+}
+
+.butterfly_container figure.butterfly { /* Holds the two wing SVGs */
+  position: absolute;
+  width: 100%; /* Fill the 'var' container */
+  height: 100%;/* Fill the 'var' container */
+  left: 0;
+  top: 0;
+  margin: 0; /* Remove fixed margins */
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%; /* Center of the butterfly figure */
+}
+
+.butterfly_container figure.butterfly .wing {
+  position: absolute;
+  width: 50%;  /* Each wing is half the figure's width */
+  height: 100%; /* Full height of the figure */
+  top: 0;
+  transform-style: preserve-3d;
+  /* The SVG inside will scale based on its viewBox */
+}
+
 .butterfly_container figure.butterfly .wing.left {
-  transform-origin: 0% 50%;
-  transform: translate3d(0%, 0, 0) scaleX(1) rotate3d(0, 1, 0, 45deg);
+  left: 0; /* Position on the left half */
+  transform-origin: 100% 50%; /* Hinge on its own right edge (towards the body) */
   animation: left-wing-flap 1s ease-in-out infinite;
 }
+
+.butterfly_container figure.butterfly .wing.right {
+  left: 50%; /* Position on the right half */
+  transform: scaleX(-1); /* Flip the right wing SVG */
+  transform-origin: 0% 50%; /* Hinge on its own left edge (towards the body) */
+  animation: right-wing-flap 1s ease-in-out infinite;
+}
+
+.butterfly_container figure.butterfly .wing svg { /* Target the actual SVG elements */
+    display: block; /* Remove extra space */
+    width: 100%;    /* Make SVG fill its .wing container */
+    height: 100%;   /* Make SVG fill its .wing container */
+}
+
 .butterfly_container figure.butterfly .wing use {
   display: block;
   transform-style: preserve-3d;
 }
-.svg-defs { position: absolute; height: 0; width: 0; overflow: hidden; }
-/* ... REST OF YOUR BUTTERFLY CSS ... */
-/*
-  Make sure to include ALL the CSS rules for:
-  .butterfly_container
-  .butterfly_container var
-  .butterfly_container figure.butterfly
-  .butterfly_container figure.butterfly .wing (and .left, .right specifics)
-  .butterfly_container figure.butterfly .wing use
-  .svg-defs
-  And any vendor prefixes if you need broader compatibility for older browsers.
-  I've included the most critical ones above based on my last response.
-*/
+
+.svg-defs { /* For the <svg> block holding <defs> */
+  position: absolute;
+  height: 0;
+  width: 0;
+  overflow: hidden; /* Important */
+}
