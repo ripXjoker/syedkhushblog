@@ -1,0 +1,82 @@
+/* detail-page.css */
+body {
+    /* Ensure your main styles (like font, background color if image fails) are here or inherited */
+    /* The noise effect from style.css will apply if body styles are consistent */
+    overflow: auto; /* Allow scrolling if content is long */
+}
+
+#background-image-container { /* Reusing ID, ensure CSS is not conflicting or make it specific */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind content */
+    overflow: hidden;
+}
+
+#detail-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* No initial transform or zoom needed here unless desired */
+    opacity: 0; /* JS will fade it in */
+}
+
+.detail-container {
+    position: relative;
+    z-index: 10;
+    color: var(--warm-off-white);
+    max-width: 800px;
+    margin: 5vh auto;
+    padding: 40px;
+    background-color: rgba(26, 25, 23, 0.5); /* Slight dark overlay for text readability */
+    border-radius: 8px;
+    min-height: 80vh; /* Ensure it takes up some space */
+}
+
+.detail-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+}
+
+.detail-container p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    font-weight: 400; /* Lighter than titles */
+    text-transform: none; /* Normal case for paragraphs */
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 30px;
+    color: var(--warm-off-white);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border: 1px solid var(--warm-off-white);
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.back-button:hover {
+    background-color: var(--warm-off-white);
+    color: var(--warm-off-black);
+}
+
+/* Responsive adjustments for detail page */
+@media (max-width: 768px) {
+    .detail-container h1 {
+        font-size: 2.2rem;
+    }
+    .detail-container {
+        padding: 25px;
+        margin: 2vh auto;
+    }
+}
