@@ -1,293 +1,329 @@
-/* --- Global Resets & Base Styles --- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* ... (Your existing CSS) ... */
+
+/* --- Styles for Butterfly Integration in Header --- */
+.site-header {
+    padding: 1rem 1rem; /* Adjusted padding */
 }
 
-:root {
-    /* Light Theme (default) */
-    --bg-color: #f8f5f0; /* Off-white, slightly parchment like */
-    --text-color: #333;
-    --accent-color: #007bff; /* A nice blue for links/buttons */
-    --header-bg: #e9e2d7;
-    --footer-bg: #dcd3c6;
-    --section-bg: #fff; /* Main content background */
-    --section-border: #d1c7b8;
-    --button-bg: #007bff;
-    --button-text: #fff;
-    --button-hover-bg: #0056b3;
-    --toc-bg: #f0ebe4;
-    --subtitle-color: #555;
-    --blockquote-bg: #f9f9f9;
-    --blockquote-border: #007bff;
-
-    /* Font Families */
-    --font-heading: 'Lora', serif;
-    --font-body: 'Open Sans', sans-serif;
+.header-content-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-around; /* Space out title and butterfly */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.dark-theme {
-    --bg-color: #1a1a1a; /* Dark grey */
-    --text-color: #e0e0e0; /* Light grey text */
-    --accent-color: #3498db; /* A lighter, vibrant blue for dark mode */
-    --header-bg: #2c2c2c;
-    --footer-bg: #222;
-    --section-bg: #252525; /* Content background for dark mode */
-    --section-border: #444;
-    --button-bg: #3498db;
-    --button-text: #fff;
-    --button-hover-bg: #2980b9;
-    --toc-bg: #282828;
-    --subtitle-color: #aaa;
-    --blockquote-bg: #303030;
-    --blockquote-border: #3498db;
-}
-
-html {
-    scroll-behavior: smooth;
-    font-size: 16px; /* Base font size */
-}
-
-body {
-    font-family: var(--font-body);
-    line-height: 1.7;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    padding-top: 20px; /* Space for theme toggle button */
-}
-
-/* --- Theme Toggle Button --- */
-#theme-toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: background-color 0.3s, transform 0.2s;
-}
-#theme-toggle-btn:hover {
-    background-color: var(--button-hover-bg);
-    transform: scale(1.1);
-}
-
-
-/* --- Header & Footer --- */
-.site-header, .site-footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    background-color: var(--header-bg);
-    transition: background-color 0.3s ease;
-}
-.site-footer {
-    background-color: var(--footer-bg);
-    margin-top: 3rem;
-    font-size: 0.9rem;
-    color: var(--subtitle-color);
+.title-area {
+    flex-basis: 60%; /* Give more space to title */
+    min-width: 300px; /* Ensure title doesn't get too squished */
+    text-align: left; /* Align title left if preferred */
+    padding: 1rem;
 }
 .site-header h1 {
-    font-family: var(--font-heading);
-    font-size: 2.8rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-color); /* Ensure it contrasts with header-bg */
+    font-size: 2.5rem; /* Slightly adjust if needed */
+    margin-bottom: 0.3rem;
 }
 .site-header .subtitle {
-    font-family: var(--font-body);
-    font-size: 1.2rem;
-    font-style: italic;
-    color: var(--subtitle-color);
-}
-
-/* --- Table of Contents (TOC) --- */
-.toc-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    background-color: var(--toc-bg);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
-}
-.toc-container h2 {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 0.5rem;
-}
-.toc-container ul {
-    list-style: none;
-    padding-left: 0;
-}
-.toc-container li {
-    margin-bottom: 0.5rem;
-}
-.toc-container a {
-    text-decoration: none;
-    color: var(--accent-color);
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-.toc-container a:hover {
-    color: var(--button-hover-bg);
-    text-decoration: underline;
-}
-
-/* --- Main Thesis Container & Sections --- */
-.thesis-container {
-    max-width: 900px; /* Optimal reading width */
-    margin: 2rem auto;
-    padding: 2.5rem;
-    background-color: var(--section-bg);
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-    /* The "parchment" paper texture */
-    background-image: 
-        linear-gradient(rgba(230, 220, 200, 0.1) .1em, transparent .1em), 
-        linear-gradient(90deg, rgba(230, 220, 200, 0.1) .1em, transparent .1em);
-    background-size: 2em 2em; /* Adjust for desired grid size */
-    transition: background-color 0.3s ease, background-image 0.3s ease;
-}
-
-.dark-theme .thesis-container {
-     background-image:
-        linear-gradient(rgba(60, 60, 60, 0.2) .1em, transparent .1em),
-        linear-gradient(90deg, rgba(60, 60, 60, 0.2) .1em, transparent .1em);
+    font-size: 1.1rem; /* Slightly adjust if needed */
 }
 
 
-.thesis-section {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px dashed var(--section-border);
-    transition: border-color 0.3s ease;
-}
-.thesis-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.section-header {
+.butterfly-animation-area {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
-    cursor: pointer; /* Indicate it's clickable to expand/collapse */
-}
-.section-header h2 {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    color: var(--text-color); /* Ensure contrast with section-bg */
+    padding: 1rem;
+    margin-top: 1rem; /* Space from title on wrap */
 }
 
-/* --- Section Content & Buttons --- */
-.section-content-wrapper {
-    overflow: hidden;
-    max-height: 0; /* Collapsed by default */
-    opacity: 0;
-    transition: max-height 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s ease-in-out;
+/* Make butterfly smaller if needed and center it */
+.butterfly_container {
+  width: 80px;  /* Original was 100px */
+  height: 80px; /* Original was 100px */
+  margin-bottom: 10px; /* Space before button */
+  /* transform: scale(0.8); /* Alternative way to scale */
 }
-.section-content-wrapper.expanded {
-    max-height: 5000px; /* Arbitrary large height */
-    opacity: 1;
+/* Adjust child elements if parent container size changed significantly */
+.butterfly_container var {
+  width: 80px;
+  height: 80px;
 }
-.section-content-wrapper.brief .elongated-content {
-    display: none;
+.butterfly_container figure.butterfly {
+  width: 80px;
+  height: 80px;
 }
-.section-content-wrapper.brief.show-elongated .brief-content {
-    display: none;
-}
-.section-content-wrapper.brief.show-elongated .elongated-content {
-    display: block;
+.butterfly_container figure.butterfly .wing {
+  /* width: 40px; /* Half of container width */
+  /* height: 80px; */
+  /* The SVG viewBox will scale content, this might not be needed unless aspect ratio changes */
 }
 
 
-.toggle-section-btn, .read-more-intro {
+.header-action-button { /* Style for the new butterfly button */
     background-color: var(--button-bg);
     color: var(--button-text);
     border: none;
     padding: 0.6em 1.2em;
-    border-radius: 25px; /* Pill shape */
+    border-radius: 25px;
     cursor: pointer;
     font-family: var(--font-body);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-size: 0.85rem;
+    font-size: 0.8rem; /* Smaller button */
     transition: background-color 0.2s ease, transform 0.1s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 10px;
 }
-.toggle-section-btn:hover, .read-more-intro:hover {
+.header-action-button:hover {
     background-color: var(--button-hover-bg);
     transform: translateY(-1px);
 }
-.read-more-intro {
-    display: inline-block; /* Or block */
-    margin-top: 1rem;
-}
 
-/* --- Typography within Sections --- */
-.thesis-section p, .thesis-section li {
-    margin-bottom: 1rem;
-    font-size: 1.05rem;
-}
-.thesis-section strong {
-    font-weight: 600;
-}
-.thesis-section ul {
-    list-style-position: outside;
-    padding-left: 1.5rem; /* Indent list items */
-}
-.thesis-section li {
-    margin-bottom: 0.7rem;
-}
-.thesis-section blockquote {
-    margin: 1.5rem 0;
-    padding: 1rem 1.5rem;
-    border-left: 5px solid var(--blockquote-border);
-    background-color: var(--blockquote-bg);
-    font-style: italic;
-    color: var(--text-color); /* Ensure good contrast */
-    border-radius: 0 5px 5px 0;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.thesis-section blockquote p {
-    margin-bottom: 0;
-}
-
-/* --- Responsive Design --- */
+/* Responsive adjustments for header */
 @media (max-width: 768px) {
+    .header-content-wrapper {
+        flex-direction: column; /* Stack title and butterfly */
+    }
+    .title-area {
+        text-align: center;
+        flex-basis: 100%;
+    }
     .site-header h1 {
         font-size: 2rem;
     }
-    .site-header .subtitle {
-        font-size: 1rem;
+    .butterfly-animation-area {
+        margin-top: 1.5rem;
     }
-    .section-header h2 {
-        font-size: 1.6rem;
-    }
-    .thesis-container {
-        padding: 1.5rem;
-        margin: 1rem;
-    }
-    .toc-container {
-        margin: 1rem;
-        padding: 1rem;
-    }
-    #theme-toggle-btn {
-        top: 10px;
-        right: 10px;
-        padding: 8px 12px;
-        font-size: 1rem;
-    }
+}
+
+
+/* --- Butterfly Animation CSS (APPEND THE FULL CSS YOU PROVIDED HERE) --- */
+/* Inspired by https://codepen.io/htgmanics/pen/nJwdl */
+@keyframes rotating {
+  0% {
+    -webkit-transform: rotate3d(0, 0, 0, 0deg);
+    -moz-transform: rotate3d(0, 0, 0, 0deg);
+    -ms-transform: rotate3d(0, 0, 0, 0deg);
+    -o-transform: rotate3d(0, 0, 0, 0deg);
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 720deg);
+    -moz-transform: rotate3d(0, 1, 0, 720deg);
+    -ms-transform: rotate3d(0, 1, 0, 720deg);
+    -o-transform: rotate3d(0, 1, 0, 720deg);
+    transform: rotate3d(0, 1, 0, 720deg);
+  }
+}
+@keyframes rotatingY {
+  100% {
+    -webkit-transform: rotateY(-360deg);
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    -o-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+  }
+}
+@keyframes fluttering {
+  0%,
+  25%,
+  50%,
+  75%,
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  10%,
+  60% {
+    /* Adjusted fluttering height to be less extreme */
+    -webkit-transform: translate3d(0, 20px, 0); 
+    -moz-transform: translate3d(0, 20px, 0);
+    -ms-transform: translate3d(0, 20px, 0);
+    -o-transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 20px, 0);
+  }
+  30%,
+  80% {
+    -webkit-transform: translate3d(0, 10px, 0);
+    -moz-transform: translate3d(0, 10px, 0);
+    -ms-transform: translate3d(0, 10px, 0);
+    -o-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+  }
+}
+@keyframes left-wing-flap {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
+  50% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, -70deg);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(1) rotate3d(0, 1, 0, 60deg);
+  }
+}
+@keyframes right-wing-flap {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+  }
+  50% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+    transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, -70deg);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -moz-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -ms-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    -o-transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+    transform: translate3d(0, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 60deg);
+  }
+}
+
+.butterfly_container {
+  /* width: 100px; /* Now handled by new styles above */
+  /* height: 100px; */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.butterfly_container var {
+  position: absolute;
+  left: 0%; /* Should be 50% to center with margin-left -50% */
+  top: 50%;
+  /* width: 100px; /* Handled by new styles */
+  /* height: 100px; */
+  margin-left: -50%; /* Corrected from -50px to -50% of parent for dynamic sizing */
+  margin-top: -50%;  /* Corrected from -50px to -50% of parent */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.butterfly_container var.rotate3d {
+  -webkit-transform: rotate3d(1, 0.5, 0, 50deg);
+  -moz-transform: rotate3d(1, 0.5, 0, 50deg);
+  -ms-transform: rotate3d(1, 0.5, 0, 50deg);
+  -o-transform: rotate3d(1, 0.5, 0, 50deg);
+  transform: rotate3d(1, 0.5, 0, 50deg);
+}
+.butterfly_container var.translate3d {
+  -webkit-animation: fluttering 10s ease-in-out infinite;
+  -moz-animation: fluttering 10s ease-in-out infinite;
+  -ms-animation: fluttering 10s ease-in-out infinite;
+  -o-animation: fluttering 10s ease-in-out infinite;
+  animation: fluttering 10s ease-in-out infinite;
+}
+.butterfly_container figure.butterfly {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* width: 100px; /* Handled by new styles */
+  /* height: 100px; */
+  margin-left: -50%;
+  margin-top: -50%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.butterfly_container figure.butterfly .wing {
+  position: absolute;
+  width: 50%; /* 50% of the figure.butterfly element */
+  height: 100%;/* 100% of the figure.butterfly element */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%; /* Default, might need adjustment */
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  /* Removed static transform, handled by animations and right/left specific transforms */
+}
+.butterfly_container figure.butterfly .wing.right {
+  /* transform-origin: 100% 50%; /* Hinge on the right edge of the wing's own box */
+  /* The original `transform-origin: 50px 50px` was for a 100px container */
+  transform-origin: 100% 50%; /* Assuming wing's 'body' side is at x=100% of its own box */
+
+  -webkit-transform: translate3d(50%, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg); /* Position right wing next to left */
+  -moz-transform: translate3d(50%, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  -ms-transform: translate3d(50%, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  -o-transform: translate3d(50%, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+  transform: translate3d(50%, 0, 0) scaleX(-1) rotate3d(0, 1, 0, 45deg);
+
+  -webkit-animation: right-wing-flap 1s ease-in-out infinite;
+  -moz-animation: right-wing-flap 1s ease-in-out infinite;
+  -ms-animation: right-wing-flap 1s ease-in-out infinite;
+  -o-animation: right-wing-flap 1s ease-in-out infinite;
+  animation: right-wing-flap 1s ease-in-out infinite;
+  filter: FlipH; /* Old IE */
+  -ms-filter: "FlipH"; /* Old IE */
+}
+.butterfly_container figure.butterfly .wing.left {
+  /* transform-origin: 0% 50%; /* Hinge on the left edge of the wing's own box */
+  /* The original `transform-origin: 50px 50px` was for a 100px container */
+  transform-origin: 0% 50%; /* Assuming wing's 'body' side is at x=0% of its own box */
+  
+  -webkit-transform: translate3d(0%, 0, 0) scaleX(1) rotate3d(0, 1, 0, 45deg); /* Position left wing */
+  -moz-transform: translate3d(0%, 0, 0) scaleX(1) rotate3d(0, 1, 0, 45deg);
+  -ms-transform: translate3d(0%, 0, 0) scaleX(1) rotate3d(0, 1, 0, 45deg);
+  -o-transform: translate3d(0%, 0, 0) scaleX(1) rotate3d(0, 1, 0, 45deg);
+  transform: translate3d(0%, 0, 0) scaleX(1) rotate3d(0, 1, 0, 45deg);
+
+  -webkit-animation: left-wing-flap 1s ease-in-out infinite;
+  -moz-animation: left-wing-flap 1s ease-in-out infinite;
+  -ms-animation: left-wing-flap 1s ease-in-out infinite;
+  -o-animation: left-wing-flap 1s ease-in-out infinite;
+  animation: left-wing-flap 1s ease-in-out infinite;
+}
+.butterfly_container figure.butterfly .wing use {
+  display: block;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /* fill: url(#image); /* This was in example, but color is set on #main path */
+}
+
+.svg-defs { /* This class is on the main SVG definitions block */
+  position: absolute;
+  height: 0;
+  width: 0;
+  overflow: hidden; /* Ensure it's truly hidden */
 }
