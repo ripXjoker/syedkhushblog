@@ -14,19 +14,10 @@ img {
  max-width: 100%;
 }
 
-$title-font: "Space Grotesk", sans-serif;
-$subtitle-font: "Inter", sans-serif;
-$italic-font: "Playfair Display", serif;
-$blog-bg: #e9e6e4;
-$body-bg: #121418;
-$title-color: #121418;
-$subtitle-color: #161419;
-$border-color: #94918f;
-
 body {
- background-color: $body-bg;
+ background-color: #121418;
  display: flex;
- font-family: $subtitle-font;
+ font-family: "Inter", sans-serif;
  justify-content: center;
  align-items: center;
  flex-direction: column;
@@ -34,14 +25,17 @@ body {
  padding: 0 2em;
  font-weight: 400;
  height: 100vh;
+ margin: 0; /* Added to ensure no default body margin interferes */
+}
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+ body {
   padding: 0;
  }
 }
 
 .blog {
- background-color: $blog-bg;
+ background-color: #e9e6e4;
  max-width: 1350px;
  display: grid;
  height: 90vh;
@@ -52,138 +46,159 @@ body {
  width: 100%;
  padding: 40px 4px;
  position: relative;
+}
 
- @media screen and (max-width: 1030px) {
+@media screen and (max-width: 1030px) {
+ .blog {
   grid-template-columns: 20% 50% 30%;
  }
+}
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+ .blog {
   grid-template-columns: 25% 75%;
   width: 100%;
   max-width: none;
  }
+}
 
- @media screen and (max-width: 560px) {
+@media screen and (max-width: 560px) {
+ .blog {
   grid-template-columns: 100%;
  }
+}
 
- &-part {
-  padding: 0 20px;
+.blog-part {
+ padding: 0 20px;
+}
 
-  &:not(:last-child) {
-   border-right: 1px solid $border-color;
-  }
+.blog-part:not(:last-child) {
+ border-right: 1px solid #94918f;
+}
+
+.blog-menu {
+ font-size: 22px;
+ text-decoration: none;
+ color: #161419;
+ display: flex;
+ letter-spacing: -0.5px;
+ align-items: center;
+}
+
+@media screen and (max-width: 1260px) {
+ .blog-menu {
+  font-size: 1.6vw;
  }
+}
 
- &-menu {
-  font-size: 22px;
-  text-decoration: none;
-  color: $subtitle-color;
-  display: flex;
-  letter-spacing: -0.5px;
-  align-items: center;
+.blog-menu svg {
+ width: 22px;
+ margin-left: 4px;
+}
 
-  @media screen and (max-width: 1260px) {
-   font-size: 1.6vw;
-  }
+.blog-menu + .blog-menu {
+ margin-top: 24px;
+}
 
-  svg {
-   width: 22px;
-   margin-left: 4px;
-  }
+.blog-menu.mention {
+ margin-top: auto;
+ font-size: 19px;
+}
 
-  & + & {
-   margin-top: 24px;
-  }
-
-  &.mention {
-   margin-top: auto;
-   font-size: 19px;
-
-   @media screen and (max-width: 1260px) {
-    font-size: 1.4vw;
-   }
-  }
-
-  &.subscribe {
-   margin-top: 8px;
-   font-size: 19px;
-   position: relative;
-
-   @media screen and (max-width: 1260px) {
-    font-size: 1.4vw;
-   }
-
-   &:before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    background-color: $subtitle-color;
-    left: 0;
-    border-radius: 1px;
-    margin-right: 14px;
-   }
-  }
-  &.rounded {
-   &:before {
-    content: "";
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    background-color: $subtitle-color;
-    margin-right: 12px;
-   }
-  }
+@media screen and (max-width: 1260px) {
+ .blog-menu.mention {
+  font-size: 1.4vw;
  }
+}
 
- .is-menu {
-  display: flex;
-  flex-direction: column;
+.blog-menu.subscribe {
+ margin-top: 8px;
+ font-size: 19px;
+ position: relative;
+}
 
-  @media screen and (max-width: 1030px) {
-   display: none;
-  }
+@media screen and (max-width: 1260px) {
+ .blog-menu.subscribe {
+  font-size: 1.4vw;
  }
+}
 
- &-big__title {
-  font-size: 132px;
-  font-family: $title-font;
-  font-weight: 700;
-  letter-spacing: -5px;
-  line-height: 1;
-  margin-bottom: 6px;
+.blog-menu.subscribe:before {
+ content: "";
+ width: 16px;
+ height: 16px;
+ background-color: #161419;
+ /* left: 0; Default is fine if margin-right on parent works */
+ border-radius: 1px;
+ margin-right: 14px;
+}
 
-  @media screen and (max-width: 1400px) {
-   font-size: 120px;
-  }
+.blog-menu.rounded:before {
+ content: "";
+ border-radius: 50%;
+ width: 12px;
+ height: 12px;
+ background-color: #161419;
+ margin-right: 12px;
+}
 
-  @media screen and (max-width: 1260px) {
-   font-size: 9vw;
-   letter-spacing: -2px;
-  }
+/* Styles for elements with class "is-menu" that are descendants of "blog" */
+/* As per HTML: <div class="blog-part is-menu"> */
+.blog .is-menu {
+ display: flex;
+ flex-direction: column;
+}
 
-  @media screen and (max-width: 560px) {
-   font-size: 36px;
-   margin-bottom: 12px;
-  }
+@media screen and (max-width: 1030px) {
+ .blog .is-menu {
+  display: none;
  }
+}
 
- &-header {
-  display: flex;
-  flex-direction: column;
+.blog-big__title {
+ font-size: 132px;
+ font-family: "Space Grotesk", sans-serif;
+ font-weight: 700;
+ letter-spacing: -5px;
+ line-height: 1;
+ margin-bottom: 6px;
+}
+
+@media screen and (max-width: 1400px) {
+ .blog-big__title {
+  font-size: 120px;
  }
+}
 
- &-article {
-  padding: 0 20px;
-
-  img {
-   height: 260px;
-   max-height: 22vh;
-   width: 100%;
-   object-fit: cover;
-   filter: grayscale(1);
-  }
+@media screen and (max-width: 1260px) {
+ .blog-big__title {
+  font-size: 9vw;
+  letter-spacing: -2px;
  }
+}
+
+@media screen and (max-width: 560px) {
+ .blog-big__title {
+  font-size: 36px;
+  margin-bottom: 12px;
+ }
+}
+
+.blog-header {
+ display: flex;
+ flex-direction: column;
+}
+
+.blog-article {
+ padding: 0 20px;
+}
+
+.blog-article img {
+ height: 260px;
+ max-height: 22vh;
+ width: 100%;
+ object-fit: cover;
+ filter: grayscale(1);
 }
 
 .page-number {
@@ -195,68 +210,71 @@ body {
  text-align: center;
  letter-spacing: -3px;
  font-weight: lighter;
- font-family: $title-font;
- border-right: 1px solid $border-color;
+ font-family: "Space Grotesk", sans-serif;
+ border-right: 1px solid #94918f;
  white-space: nowrap;
+}
 
- @media screen and (max-width: 1260px) {
+@media screen and (max-width: 1260px) {
+ .page-number {
   font-size: 5vw;
  }
 }
 
-.small-title {
- border-bottom: 1px solid $border-color;
+.small-title { /* This class is used on .blog-menu */
+ border-bottom: 1px solid #94918f;
  margin-bottom: 20px;
  padding-bottom: 20px;
+}
 
- @media screen and (max-width: 560px) {
+@media screen and (max-width: 560px) {
+ .small-title {
   font-size: 14px;
   position: absolute;
   top: 10px;
   right: 24px;
   border-bottom: 0;
+  /* margin-bottom and padding-bottom will be overridden by absolute positioning context */
  }
 }
 
-.date {
+.date { /* This class is used on .blog-menu.small-title */
  display: flex;
  justify-content: flex-end;
 }
 
-.blog-article {
- h2 {
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1.2;
-  margin: 8px 0 8px;
+.blog-article h2 {
+ font-size: 26px;
+ font-weight: 500;
+ line-height: 1.2;
+ margin: 8px 0 8px;
+}
 
-  span {
-   font-family: $italic-font;
-  }
- }
+.blog-article h2 span {
+ font-family: "Playfair Display", serif;
+}
 
- p {
-  line-height: 1.5;
-  margin: 14px 0;
- }
+.blog-article p {
+ line-height: 1.5;
+ margin: 14px 0;
+}
 
- a {
-  color: $subtitle-color;
-  text-decoration: none;
-  font-size: 26px;
-  letter-spacing: -1px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: auto;
-  border-top: 1px solid $border-color;
-  padding-top: 14px;
+.blog-article a {
+ color: #161419;
+ text-decoration: none;
+ font-size: 26px;
+ letter-spacing: -1px;
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+ margin-top: auto;
+ border-top: 1px solid #94918f;
+ padding-top: 14px;
+}
 
-  svg {
-   width: 26px;
-   margin-right: 10px;
-  }
- }
+.blog-article a svg {
+ width: 26px;
+ margin-right: 10px;
 }
 
 .blog-detail {
@@ -264,10 +282,10 @@ body {
  align-items: center;
  justify-content: space-between;
  font-size: 14px;
+}
 
- span {
-  font-family: $italic-font;
- }
+.blog-detail span {
+ font-family: "Playfair Display", serif;
 }
 
 .blog-header-container {
@@ -277,89 +295,124 @@ body {
  display: flex;
  flex-direction: column;
  scroll-snap-type: y mandatory;
- border-right: 1px solid $border-color;
+ border-right: 1px solid #94918f;
+}
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+ .blog-header-container {
   border-right: 0;
  }
+}
 
- & > * {
-  flex-shrink: 0;
-  min-height: 100%;
-  scroll-snap-align: start;
- }
+.blog-header-container > * {
+ flex-shrink: 0;
+ min-height: 100%;
+ scroll-snap-align: start;
+}
 
- .blog-article:not(.header-article) {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
- }
+.blog-header-container .blog-article:not(.header-article) {
+ flex-grow: 1;
+ display: flex;
+ flex-direction: column;
 }
 
 marquee {
  font-size: 20px;
- background-color: $body-bg;
- color: $blog-bg;
+ background-color: #121418;
+ color: #e9e6e4;
  padding: 6px 0;
  width: calc(100% + 44px);
- margin-left: -20px;
+ margin-left: -20px; /* Be careful with negative margins and overflow */
  flex-shrink: 0;
+}
 
- span:before {
-  display: inline-block;
-  content: "";
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  position: relative;
-  top: -1px;
-  vertical-align: baseline;
-  background-color: $blog-bg;
-  margin: 0 16px;
- }
+marquee span:before {
+ display: inline-block;
+ content: "";
+ border-radius: 50%;
+ width: 10px;
+ height: 10px;
+ position: relative;
+ top: -1px;
+ vertical-align: baseline;
+ background-color: #e9e6e4;
+ margin: 0 16px;
 }
 
 .blog-right {
  overflow: auto;
- height: calc(100% + 60px);
- .rounded {
-  font-style: italic;
-  font-size: 18px;
-  &:before {
-   content: "";
-   border-radius: 50%;
-   width: 9px;
-   height: 9px;
-   background-color: rgb(22 20 25);
-   margin-right: 6px;
-  }
- }
+ height: calc(100% + 60px); /* This might cause overflow issues if not contained properly by parent */
 }
+
+/* Styles for .rounded elements inside .blog-right */
+/* HTML: <div class="blog-menu rounded">See All</div> is in .blog-right-title-container, which is child of .right-blog */
+/* The .right-blog has a child .blog-right. The .blog-menu.rounded is in blog-right-title-container, which is NOT in .blog-right */
+/* Re-checking SCSS and HTML:
+   <div class="blog-part right-blog">
+     <div class="blog-right-title-container">
+       <div class="blog-menu rounded">See All</div>
+     </div>
+     <div class="blog-right"> ... </div>
+   </div>
+   The SCSS was:
+   .blog-right {
+     .rounded {
+       font-style: italic;
+       font-size: 18px;
+       &:before { ... background-color: rgb(22 20 25); ... }
+     }
+   }
+   This means the .blog-menu.rounded inside .blog-right-title-container will NOT pick up this specific rule.
+   It will pick up the general .blog-menu.rounded rule.
+   If there's another .rounded element *directly* inside .blog-right content area, this rule would apply.
+   Given the provided HTML, this specific .blog-right .rounded rule might not apply to the "See All" button.
+   I will keep the rule as per direct SCSS translation.
+*/
+.blog-right .rounded {
+ font-style: italic;
+ font-size: 18px;
+}
+
+.blog-right .rounded:before {
+ content: "";
+ border-radius: 50%;
+ width: 9px;
+ height: 9px;
+ background-color: rgb(22 20 25);
+ margin-right: 6px;
+}
+
 
 .blog-right-title {
  font-size: 25px;
- font-family: $italic-font;
+ font-family: "Playfair Display", serif;
 }
 
 .blog-right-title-container {
  display: flex;
  align-items: center;
  justify-content: space-between;
- border-bottom: 1px solid $border-color;
+ border-bottom: 1px solid #94918f;
  margin-bottom: 20px;
  padding-bottom: 20px;
  margin-top: 100px;
  letter-spacing: -1px;
+}
 
- @media screen and (max-width: 1400px) {
+@media screen and (max-width: 1400px) {
+ .blog-right-title-container {
   margin-top: 88px;
  }
+}
 
- @media screen and (max-width: 1260px) {
+@media screen and (max-width: 1260px) {
+ .blog-right-title-container {
   margin-top: 6vw;
  }
+}
 
- @media screen and (max-width: 1030px) {
+@media screen and (max-width: 1030px) {
+ .blog-right-title-container {
   margin-top: 5vw;
  }
 }
@@ -373,40 +426,43 @@ marquee {
 .blog-right-page {
  font-size: 56px;
  margin-bottom: 16px;
- font-family: $title-font;
+ font-family: "Space Grotesk", sans-serif;
+}
 
- &-title {
-  font-family: $title-font;
-  font-size: 28px;
-  font-weight: 600;
-  max-width: 16ch;
-  letter-spacing: -2px;
- }
+.blog-right-page-title {
+ font-family: "Space Grotesk", sans-serif;
+ font-size: 28px;
+ font-weight: 600;
+ max-width: 16ch;
+ letter-spacing: -2px;
+}
 
- &-subtitle {
-  max-width: 33ch;
-  font-size: 15px;
-  margin-top: 12px;
-  line-height: 1.4;
- }
+.blog-right-page-subtitle {
+ max-width: 33ch;
+ font-size: 15px;
+ margin-top: 12px;
+ line-height: 1.4;
 }
 
 .blog-right-container + .blog-right-container {
  margin-top: 40px;
 }
 
-.right-blog {
+.right-blog { /* This is a .blog-part */
  display: flex;
  flex-direction: column;
+}
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+ .right-blog {
   display: none;
  }
+}
 
- .blog-menu {
-  @media screen and (max-width: 1030px) {
-   display: none;
-  }
+/* Styles for .blog-menu elements that are descendants of .right-blog */
+@media screen and (max-width: 1030px) {
+ .right-blog .blog-menu {
+  display: none;
  }
 }
 
@@ -416,44 +472,51 @@ marquee {
 
 .circle {
  width: 100%;
- aspect-ratio: 1/1;
+ /* aspect-ratio: 1/1; Using padding-bottom for older browser compatibility if needed, but aspect-ratio is fine for modern */
+ aspect-ratio: 1;
  border-radius: 50%;
- background-color: $body-bg;
+ background-color: #121418;
  display: flex;
  align-items: center;
  flex-direction: column;
  justify-content: center;
- color: $blog-bg;
+ color: #e9e6e4;
  padding: 20px;
  text-align: center;
  margin-top: 40px;
+}
 
- &-title {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  font-family: $title-font;
+.circle-title {
+ font-size: 24px;
+ font-weight: 600;
+ margin-bottom: 12px;
+ font-family: "Space Grotesk", sans-serif;
+}
 
-  @media screen and (max-width: 1030px) {
-   display: none;
-  }
- }
-
- &-subtitle {
-  max-width: 30ch;
-  font-size: 14px;
-  line-height: 1.3;
-  margin-bottom: 16px;
- }
-
- &-footer {
-  font-family: $italic-font;
-  font-size: 30px;
+@media screen and (max-width: 1030px) {
+ .circle-title {
+  display: none;
  }
 }
 
+.circle-subtitle {
+ max-width: 30ch;
+ font-size: 14px;
+ line-height: 1.3;
+ margin-bottom: 16px;
+}
+
+.circle-footer {
+ font-family: "Playfair Display", serif;
+ font-size: 30px;
+}
+
 .blog-is-sticky {
- @media screen and (max-width: 560px) {
+ /* This class is on .blog-header. No specific styles other than media query. */
+}
+
+@media screen and (max-width: 560px) {
+ .blog-is-sticky { /* Targets .blog-header.blog-is-sticky */
   display: none;
  }
 }
