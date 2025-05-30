@@ -4,31 +4,31 @@
 * {
  outline: none;
  box-sizing: border-box;
- margin: 0; /* Add margin reset for consistency */
- padding: 0; /* Add padding reset for consistency */
+ margin: 0;
+ padding: 0;
 }
 
 html {
  box-sizing: border-box;
  -webkit-font-smoothing: antialiased;
- -moz-osx-font-smoothing: grayscale; /* For Firefox */
- scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+ -moz-osx-font-smoothing: grayscale;
+ scroll-behavior: smooth;
 }
 
 img {
  max-width: 100%;
- display: block; /* Remove extra space below images */
+ display: block;
 }
 
 body {
- background-color: #121418; /* Default body background */
+ background-color: #121418; /* Default body background for main page */
  display: flex;
  font-family: "Inter", sans-serif;
  justify-content: center;
  align-items: center;
  flex-direction: column;
  width: 100%;
- min-height: 100vh; /* Use min-height to allow content to expand */
+ min-height: 100vh;
  padding: 0 2em;
  font-weight: 400;
  color: #161419; /* Default text color for content on light backgrounds */
@@ -40,7 +40,7 @@ body {
  }
 }
 
-/* ----- MAIN BLOG LAYOUT STYLES (from your original working version) ----- */
+/* ----- MAIN BLOG LAYOUT STYLES (for index.html) ----- */
 .blog {
  background-color: #e9e6e4;
  max-width: 1350px;
@@ -66,7 +66,7 @@ body {
   grid-template-columns: 25% 75%;
   width: 100%;
   max-width: none;
-  height: auto; /* Allow height to adjust on smaller screens */
+  height: auto;
   max-height: none;
  }
 }
@@ -75,7 +75,7 @@ body {
  .blog {
   grid-template-columns: 100%;
   height: auto;
-  overflow: visible; /* Allow scrolling if content overflows on very small screens */
+  overflow: visible;
  }
 }
 
@@ -94,10 +94,10 @@ body {
  display: flex;
  letter-spacing: -0.5px;
  align-items: center;
- transition: color 0.3s ease; /* Smooth transition for hover */
+ transition: color 0.3s ease;
 }
 .blog-menu:hover {
-    color: #5c5a5e; /* Slightly darker hover for links */
+    color: #5c5a5e;
 }
 
 
@@ -175,7 +175,7 @@ body {
  letter-spacing: -5px;
  line-height: 1;
  margin-bottom: 6px;
- color: #121418; /* Ensure title color is distinct */
+ color: #121418;
 }
 
 @media screen and (max-width: 1400px) {
@@ -193,7 +193,7 @@ body {
 
 @media screen and (max-width: 560px) {
  .blog-big__title {
-  font-size: 48px; /* Slightly larger for better impact on small screens */
+  font-size: 48px;
   margin-bottom: 12px;
   letter-spacing: -1px;
  }
@@ -214,7 +214,7 @@ body {
  width: 100%;
  object-fit: cover;
  filter: grayscale(1);
- border-radius: 4px; /* Subtle rounding for images */
+ border-radius: 4px;
 }
 
 .page-number {
@@ -239,13 +239,13 @@ body {
 }
 @media screen and (max-width: 768px) {
     .page-number {
-        border-right: none; /* Remove border if it's the last column */
-        padding-bottom: 20px; /* Add some padding if it's the last item */
+        border-right: none;
+        padding-bottom: 20px;
     }
 }
 
 
-.small-title { /* This class is used on .blog-menu */
+.small-title {
  border-bottom: 1px solid #94918f;
  margin-bottom: 20px;
  padding-bottom: 20px;
@@ -261,38 +261,38 @@ body {
  }
 }
 
-.date { /* This class is used on .blog-menu.small-title */
+.date {
  display: flex;
  justify-content: flex-end;
- font-family: "Inter", sans-serif; /* Ensure consistent font */
+ font-family: "Inter", sans-serif;
 }
 
 .blog-article h2 {
- font-family: "Space Grotesk", sans-serif; /* Consistent heading font */
+ font-family: "Space Grotesk", sans-serif;
  font-size: 26px;
  font-weight: 500;
  line-height: 1.2;
- margin: 12px 0 8px; /* Adjusted margin */
+ margin: 12px 0 8px;
  color: #121418;
 }
 
 .blog-article h2 span {
  font-family: "Playfair Display", serif;
- font-style: italic; /* Ensure italic for Playfair */
+ font-style: italic;
 }
 
 .blog-article p {
- line-height: 1.6; /* Increased line-height for readability */
+ line-height: 1.6;
  margin: 14px 0;
  font-family: "Inter", sans-serif;
- color: #333; /* Slightly softer black for paragraph text */
+ color: #333;
 }
 
 .blog-article a {
  color: #161419;
  text-decoration: none;
  font-size: 26px;
- font-family: "Space Grotesk", sans-serif; /* Consistent font for link text */
+ font-family: "Space Grotesk", sans-serif;
  letter-spacing: -1px;
  display: flex;
  justify-content: flex-end;
@@ -316,7 +316,7 @@ body {
  align-items: center;
  justify-content: space-between;
  font-size: 14px;
- color: #555; /* Slightly lighter color for details */
+ color: #555;
 }
 
 .blog-detail span {
@@ -337,8 +337,8 @@ body {
 @media screen and (max-width: 768px) {
  .blog-header-container {
   border-right: 0;
-  height: auto; /* Allow content to determine height */
-  overflow-y: visible; /* Allow natural scrolling */
+  height: auto;
+  overflow-y: visible;
  }
 }
 
@@ -349,7 +349,7 @@ body {
 }
 @media screen and (max-width: 768px) {
     .blog-header-container > * {
-        min-height: auto; /* Adjust for non-snapping scroll */
+        min-height: auto;
         scroll-snap-align: none;
     }
 }
@@ -365,9 +365,9 @@ marquee {
  font-size: 20px;
  background-color: #121418;
  color: #e9e6e4;
- padding: 8px 0; /* Increased padding */
+ padding: 8px 0;
  width: calc(100% + 44px);
- margin-left: -22px; /* Adjust based on padding of .blog-part */
+ margin-left: -22px;
  flex-shrink: 0;
  font-family: "Inter", sans-serif;
 }
@@ -387,8 +387,8 @@ marquee span:before {
 
 .blog-right {
  overflow: auto;
- height: calc(100% + 60px); /* Check if this creates unwanted scrollbars */
- padding-bottom: 40px; /* Add some padding at the bottom */
+ height: calc(100% + 60px);
+ padding-bottom: 40px;
 }
 @media screen and (max-width: 768px) {
     .blog-right {
@@ -400,7 +400,7 @@ marquee span:before {
 .blog-right .rounded {
  font-style: italic;
  font-size: 18px;
- font-family: "Playfair Display", serif; /* Consistent italic font */
+ font-family: "Playfair Display", serif;
 }
 
 .blog-right .rounded:before {
@@ -469,14 +469,14 @@ marquee span:before {
  max-width: 16ch;
  letter-spacing: -2px;
  color: #121418;
- line-height: 1.2; /* Added for consistency */
+ line-height: 1.2;
 }
 
 .blog-right-page-subtitle {
  max-width: 33ch;
  font-size: 15px;
  margin-top: 12px;
- line-height: 1.5; /* Increased for readability */
+ line-height: 1.5;
  font-family: "Inter", sans-serif;
  color: #555;
 }
@@ -503,11 +503,11 @@ marquee span:before {
 }
 
 ::-webkit-scrollbar {
- display: none; /* Hides scrollbar for WebKit browsers */
+ display: none;
 }
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 
@@ -542,7 +542,7 @@ body {
 .circle-subtitle {
  max-width: 30ch;
  font-size: 14px;
- line-height: 1.4; /* Increased */
+ line-height: 1.4;
  margin-bottom: 16px;
  font-family: "Inter", sans-serif;
 }
@@ -566,27 +566,27 @@ body {
 
 /* ===== STYLES FOR SINGLE ARTICLE PAGES (e.g., premeditatio-malorum.html) ===== */
 body.article-page {
-    background-color: #f4f4f4; /* Lighter gray for a softer reading background */
+    background-color: #f4f4f4;
     color: #333333;
     font-family: "Inter", sans-serif;
     padding: 20px;
-    line-height: 1.7; /* Generous line height for readability */
+    line-height: 1.7;
     /* Override main body styles that might conflict */
-    display: block;
+    display: block; /* Allow normal block flow */
     justify-content: initial;
     align-items: initial;
     flex-direction: initial;
-    height: auto; /* Let content dictate height */
-    min-height: 100vh; /* Ensure it takes at least full viewport height */
+    height: auto;
+    min-height: 100vh;
 }
 
 .article-container {
-    max-width: 720px; /* Common width for readable text lines */
-    margin: 50px auto; /* More top/bottom margin */
-    padding: 40px 50px; /* More generous padding */
+    max-width: 720px;
+    margin: 50px auto;
+    padding: 40px 50px;
     background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Softer shadow */
-    border-radius: 6px; /* Slightly less pronounced rounding */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 6px;
 }
 
 @media screen and (max-width: 768px) {
@@ -597,7 +597,7 @@ body.article-page {
 }
 @media screen and (max-width: 480px) {
     .article-container {
-        margin: 20px 10px; /* Less margin on very small screens */
+        margin: 20px 10px;
         padding: 25px 20px;
         border-radius: 4px;
     }
@@ -606,22 +606,22 @@ body.article-page {
 
 .article-container .back-link {
     display: inline-block;
-    margin-bottom: 35px; /* More space below back link */
+    margin-bottom: 35px;
     font-family: "Space Grotesk", sans-serif;
-    color: #007bff; /* Standard blue for links, or use your theme color */
+    color: #007bff;
     text-decoration: none;
     font-weight: 500;
-    font-size: 1em; /* Adjusted size */
+    font-size: 1em;
     transition: color 0.2s ease-in-out;
 }
 .article-container .back-link:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #0056b3;
     text-decoration: underline;
 }
 
 .article-container h1 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 2.5em; /* Adjusted for readability */
+    font-size: 2.5em;
     font-weight: 700;
     line-height: 1.25;
     margin-bottom: 0.8em;
@@ -630,17 +630,17 @@ body.article-page {
 
 .article-container h2 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 1.7em; /* Adjusted for readability */
+    font-size: 1.7em;
     font-weight: 600;
     line-height: 1.35;
-    margin-top: 2em; /* More space above H2 */
+    margin-top: 2em;
     margin-bottom: 0.7em;
     color: #121418;
-    border-bottom: 1px solid #e0e0e0; /* Lighter border */
+    border-bottom: 1px solid #e0e0e0;
     padding-bottom: 0.4em;
 }
 
-.article-container h3 { /* Added basic H3 styling if needed */
+.article-container h3 {
     font-family: "Space Grotesk", sans-serif;
     font-size: 1.4em;
     font-weight: 600;
@@ -653,13 +653,13 @@ body.article-page {
 
 .article-container p,
 .article-container li {
-    font-size: 1.0rem; /* Standard responsive font size */
+    font-size: 1.0rem;
     margin-bottom: 1.3em;
     color: #333333;
 }
 
 .article-container p a,
-.article-container li a { /* Styling for links within article text */
+.article-container li a {
     color: #007bff;
     text-decoration: underline;
     transition: color 0.2s ease-in-out;
@@ -671,21 +671,21 @@ body.article-page {
 
 
 .article-container strong {
-    font-weight: 600; /* More distinct bold */
-    color: #222; /* Slightly darker bold text */
+    font-weight: 600;
+    color: #222;
 }
 
 .article-container ul,
-.article-container ol { /* Added OL styling too */
-    list-style-position: outside; /* Bullets/numbers outside the text block */
-    margin-left: 0; /* Reset margin-left from global */
-    padding-left: 30px; /* Space for bullets/numbers */
+.article-container ol {
+    list-style-position: outside;
+    margin-left: 0; /* Reset for direct children */
+    padding-left: 30px;
 }
 
 .article-container ul li,
 .article-container ol li {
     margin-bottom: 0.8em;
-    padding-left: 5px; /* Small space between bullet and text */
+    padding-left: 5px;
 }
 .article-container ul {
     list-style-type: disc;
@@ -696,8 +696,8 @@ body.article-page {
 
 
 .article-container .comments-section {
-    margin-top: 60px; /* More space before comments */
-    border-top: 2px solid #d0d0d0; /* More prominent border */
+    margin-top: 60px;
+    border-top: 2px solid #d0d0d0;
     padding-top: 35px;
 }
 
