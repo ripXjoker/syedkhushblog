@@ -1,31 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
+/* ----- GLOBAL RESETS & DEFAULTS ----- */
 * {
  outline: none;
  box-sizing: border-box;
+ margin: 0; /* Add margin reset for consistency */
+ padding: 0; /* Add padding reset for consistency */
 }
 
 html {
  box-sizing: border-box;
  -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale; /* For Firefox */
+ scroll-behavior: smooth; /* Smooth scrolling for anchor links */
 }
 
 img {
  max-width: 100%;
+ display: block; /* Remove extra space below images */
 }
 
 body {
- background-color: #121418;
+ background-color: #121418; /* Default body background */
  display: flex;
  font-family: "Inter", sans-serif;
  justify-content: center;
  align-items: center;
  flex-direction: column;
  width: 100%;
+ min-height: 100vh; /* Use min-height to allow content to expand */
  padding: 0 2em;
  font-weight: 400;
- height: 100vh;
- margin: 0; /* Added to ensure no default body margin interferes */
+ color: #161419; /* Default text color for content on light backgrounds */
 }
 
 @media screen and (max-width: 768px) {
@@ -34,6 +40,7 @@ body {
  }
 }
 
+/* ----- MAIN BLOG LAYOUT STYLES (from your original working version) ----- */
 .blog {
  background-color: #e9e6e4;
  max-width: 1350px;
@@ -59,12 +66,16 @@ body {
   grid-template-columns: 25% 75%;
   width: 100%;
   max-width: none;
+  height: auto; /* Allow height to adjust on smaller screens */
+  max-height: none;
  }
 }
 
 @media screen and (max-width: 560px) {
  .blog {
   grid-template-columns: 100%;
+  height: auto;
+  overflow: visible; /* Allow scrolling if content overflows on very small screens */
  }
 }
 
@@ -83,7 +94,12 @@ body {
  display: flex;
  letter-spacing: -0.5px;
  align-items: center;
+ transition: color 0.3s ease; /* Smooth transition for hover */
 }
+.blog-menu:hover {
+    color: #5c5a5e; /* Slightly darker hover for links */
+}
+
 
 @media screen and (max-width: 1260px) {
  .blog-menu {
@@ -128,7 +144,6 @@ body {
  width: 16px;
  height: 16px;
  background-color: #161419;
- /* left: 0; Default is fine if margin-right on parent works */
  border-radius: 1px;
  margin-right: 14px;
 }
@@ -142,8 +157,6 @@ body {
  margin-right: 12px;
 }
 
-/* Styles for elements with class "is-menu" that are descendants of "blog" */
-/* As per HTML: <div class="blog-part is-menu"> */
 .blog .is-menu {
  display: flex;
  flex-direction: column;
@@ -162,6 +175,7 @@ body {
  letter-spacing: -5px;
  line-height: 1;
  margin-bottom: 6px;
+ color: #121418; /* Ensure title color is distinct */
 }
 
 @media screen and (max-width: 1400px) {
@@ -179,8 +193,9 @@ body {
 
 @media screen and (max-width: 560px) {
  .blog-big__title {
-  font-size: 36px;
+  font-size: 48px; /* Slightly larger for better impact on small screens */
   margin-bottom: 12px;
+  letter-spacing: -1px;
  }
 }
 
@@ -199,6 +214,7 @@ body {
  width: 100%;
  object-fit: cover;
  filter: grayscale(1);
+ border-radius: 4px; /* Subtle rounding for images */
 }
 
 .page-number {
@@ -213,6 +229,7 @@ body {
  font-family: "Space Grotesk", sans-serif;
  border-right: 1px solid #94918f;
  white-space: nowrap;
+ color: #121418;
 }
 
 @media screen and (max-width: 1260px) {
@@ -220,6 +237,13 @@ body {
   font-size: 5vw;
  }
 }
+@media screen and (max-width: 768px) {
+    .page-number {
+        border-right: none; /* Remove border if it's the last column */
+        padding-bottom: 20px; /* Add some padding if it's the last item */
+    }
+}
+
 
 .small-title { /* This class is used on .blog-menu */
  border-bottom: 1px solid #94918f;
@@ -234,35 +258,41 @@ body {
   top: 10px;
   right: 24px;
   border-bottom: 0;
-  /* margin-bottom and padding-bottom will be overridden by absolute positioning context */
  }
 }
 
 .date { /* This class is used on .blog-menu.small-title */
  display: flex;
  justify-content: flex-end;
+ font-family: "Inter", sans-serif; /* Ensure consistent font */
 }
 
 .blog-article h2 {
+ font-family: "Space Grotesk", sans-serif; /* Consistent heading font */
  font-size: 26px;
  font-weight: 500;
  line-height: 1.2;
- margin: 8px 0 8px;
+ margin: 12px 0 8px; /* Adjusted margin */
+ color: #121418;
 }
 
 .blog-article h2 span {
  font-family: "Playfair Display", serif;
+ font-style: italic; /* Ensure italic for Playfair */
 }
 
 .blog-article p {
- line-height: 1.5;
+ line-height: 1.6; /* Increased line-height for readability */
  margin: 14px 0;
+ font-family: "Inter", sans-serif;
+ color: #333; /* Slightly softer black for paragraph text */
 }
 
 .blog-article a {
  color: #161419;
  text-decoration: none;
  font-size: 26px;
+ font-family: "Space Grotesk", sans-serif; /* Consistent font for link text */
  letter-spacing: -1px;
  display: flex;
  justify-content: flex-end;
@@ -270,6 +300,10 @@ body {
  margin-top: auto;
  border-top: 1px solid #94918f;
  padding-top: 14px;
+ transition: color 0.3s ease;
+}
+.blog-article a:hover {
+    color: #5c5a5e;
 }
 
 .blog-article a svg {
@@ -282,10 +316,12 @@ body {
  align-items: center;
  justify-content: space-between;
  font-size: 14px;
+ color: #555; /* Slightly lighter color for details */
 }
 
 .blog-detail span {
  font-family: "Playfair Display", serif;
+ font-style: italic;
 }
 
 .blog-header-container {
@@ -301,6 +337,8 @@ body {
 @media screen and (max-width: 768px) {
  .blog-header-container {
   border-right: 0;
+  height: auto; /* Allow content to determine height */
+  overflow-y: visible; /* Allow natural scrolling */
  }
 }
 
@@ -309,6 +347,13 @@ body {
  min-height: 100%;
  scroll-snap-align: start;
 }
+@media screen and (max-width: 768px) {
+    .blog-header-container > * {
+        min-height: auto; /* Adjust for non-snapping scroll */
+        scroll-snap-align: none;
+    }
+}
+
 
 .blog-header-container .blog-article:not(.header-article) {
  flex-grow: 1;
@@ -320,10 +365,11 @@ marquee {
  font-size: 20px;
  background-color: #121418;
  color: #e9e6e4;
- padding: 6px 0;
+ padding: 8px 0; /* Increased padding */
  width: calc(100% + 44px);
- margin-left: -20px; /* Be careful with negative margins and overflow */
+ margin-left: -22px; /* Adjust based on padding of .blog-part */
  flex-shrink: 0;
+ font-family: "Inter", sans-serif;
 }
 
 marquee span:before {
@@ -341,36 +387,20 @@ marquee span:before {
 
 .blog-right {
  overflow: auto;
- height: calc(100% + 60px); /* This might cause overflow issues if not contained properly by parent */
+ height: calc(100% + 60px); /* Check if this creates unwanted scrollbars */
+ padding-bottom: 40px; /* Add some padding at the bottom */
+}
+@media screen and (max-width: 768px) {
+    .blog-right {
+        height: auto;
+        overflow: visible;
+    }
 }
 
-/* Styles for .rounded elements inside .blog-right */
-/* HTML: <div class="blog-menu rounded">See All</div> is in .blog-right-title-container, which is child of .right-blog */
-/* The .right-blog has a child .blog-right. The .blog-menu.rounded is in blog-right-title-container, which is NOT in .blog-right */
-/* Re-checking SCSS and HTML:
-   <div class="blog-part right-blog">
-     <div class="blog-right-title-container">
-       <div class="blog-menu rounded">See All</div>
-     </div>
-     <div class="blog-right"> ... </div>
-   </div>
-   The SCSS was:
-   .blog-right {
-     .rounded {
-       font-style: italic;
-       font-size: 18px;
-       &:before { ... background-color: rgb(22 20 25); ... }
-     }
-   }
-   This means the .blog-menu.rounded inside .blog-right-title-container will NOT pick up this specific rule.
-   It will pick up the general .blog-menu.rounded rule.
-   If there's another .rounded element *directly* inside .blog-right content area, this rule would apply.
-   Given the provided HTML, this specific .blog-right .rounded rule might not apply to the "See All" button.
-   I will keep the rule as per direct SCSS translation.
-*/
 .blog-right .rounded {
  font-style: italic;
  font-size: 18px;
+ font-family: "Playfair Display", serif; /* Consistent italic font */
 }
 
 .blog-right .rounded:before {
@@ -378,7 +408,7 @@ marquee span:before {
  border-radius: 50%;
  width: 9px;
  height: 9px;
- background-color: rgb(22 20 25);
+ background-color: #161419;
  margin-right: 6px;
 }
 
@@ -386,6 +416,8 @@ marquee span:before {
 .blog-right-title {
  font-size: 25px;
  font-family: "Playfair Display", serif;
+ font-style: italic;
+ color: #121418;
 }
 
 .blog-right-title-container {
@@ -427,6 +459,7 @@ marquee span:before {
  font-size: 56px;
  margin-bottom: 16px;
  font-family: "Space Grotesk", sans-serif;
+ color: #121418;
 }
 
 .blog-right-page-title {
@@ -435,20 +468,24 @@ marquee span:before {
  font-weight: 600;
  max-width: 16ch;
  letter-spacing: -2px;
+ color: #121418;
+ line-height: 1.2; /* Added for consistency */
 }
 
 .blog-right-page-subtitle {
  max-width: 33ch;
  font-size: 15px;
  margin-top: 12px;
- line-height: 1.4;
+ line-height: 1.5; /* Increased for readability */
+ font-family: "Inter", sans-serif;
+ color: #555;
 }
 
 .blog-right-container + .blog-right-container {
  margin-top: 40px;
 }
 
-.right-blog { /* This is a .blog-part */
+.right-blog {
  display: flex;
  flex-direction: column;
 }
@@ -459,7 +496,6 @@ marquee span:before {
  }
 }
 
-/* Styles for .blog-menu elements that are descendants of .right-blog */
 @media screen and (max-width: 1030px) {
  .right-blog .blog-menu {
   display: none;
@@ -467,12 +503,16 @@ marquee span:before {
 }
 
 ::-webkit-scrollbar {
- display: none;
+ display: none; /* Hides scrollbar for WebKit browsers */
 }
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 
 .circle {
  width: 100%;
- /* aspect-ratio: 1/1; Using padding-bottom for older browser compatibility if needed, but aspect-ratio is fine for modern */
  aspect-ratio: 1;
  border-radius: 50%;
  background-color: #121418;
@@ -502,21 +542,168 @@ marquee span:before {
 .circle-subtitle {
  max-width: 30ch;
  font-size: 14px;
- line-height: 1.3;
+ line-height: 1.4; /* Increased */
  margin-bottom: 16px;
+ font-family: "Inter", sans-serif;
 }
 
 .circle-footer {
  font-family: "Playfair Display", serif;
+ font-style: italic;
  font-size: 30px;
 }
 
 .blog-is-sticky {
- /* This class is on .blog-header. No specific styles other than media query. */
+ /* Styles apply to .blog-header.blog-is-sticky */
 }
 
 @media screen and (max-width: 560px) {
- .blog-is-sticky { /* Targets .blog-header.blog-is-sticky */
+ .blog-is-sticky {
   display: none;
  }
+}
+
+
+/* ===== STYLES FOR SINGLE ARTICLE PAGES (e.g., premeditatio-malorum.html) ===== */
+body.article-page {
+    background-color: #f4f4f4; /* Lighter gray for a softer reading background */
+    color: #333333;
+    font-family: "Inter", sans-serif;
+    padding: 20px;
+    line-height: 1.7; /* Generous line height for readability */
+    /* Override main body styles that might conflict */
+    display: block;
+    justify-content: initial;
+    align-items: initial;
+    flex-direction: initial;
+    height: auto; /* Let content dictate height */
+    min-height: 100vh; /* Ensure it takes at least full viewport height */
+}
+
+.article-container {
+    max-width: 720px; /* Common width for readable text lines */
+    margin: 50px auto; /* More top/bottom margin */
+    padding: 40px 50px; /* More generous padding */
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Softer shadow */
+    border-radius: 6px; /* Slightly less pronounced rounding */
+}
+
+@media screen and (max-width: 768px) {
+    .article-container {
+        margin: 30px auto;
+        padding: 30px 25px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .article-container {
+        margin: 20px 10px; /* Less margin on very small screens */
+        padding: 25px 20px;
+        border-radius: 4px;
+    }
+}
+
+
+.article-container .back-link {
+    display: inline-block;
+    margin-bottom: 35px; /* More space below back link */
+    font-family: "Space Grotesk", sans-serif;
+    color: #007bff; /* Standard blue for links, or use your theme color */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em; /* Adjusted size */
+    transition: color 0.2s ease-in-out;
+}
+.article-container .back-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+.article-container h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 2.5em; /* Adjusted for readability */
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.8em;
+    color: #121418;
+}
+
+.article-container h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.7em; /* Adjusted for readability */
+    font-weight: 600;
+    line-height: 1.35;
+    margin-top: 2em; /* More space above H2 */
+    margin-bottom: 0.7em;
+    color: #121418;
+    border-bottom: 1px solid #e0e0e0; /* Lighter border */
+    padding-bottom: 0.4em;
+}
+
+.article-container h3 { /* Added basic H3 styling if needed */
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.4em;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+    color: #121418;
+}
+
+
+.article-container p,
+.article-container li {
+    font-size: 1.0rem; /* Standard responsive font size */
+    margin-bottom: 1.3em;
+    color: #333333;
+}
+
+.article-container p a,
+.article-container li a { /* Styling for links within article text */
+    color: #007bff;
+    text-decoration: underline;
+    transition: color 0.2s ease-in-out;
+}
+.article-container p a:hover,
+.article-container li a:hover {
+    color: #0056b3;
+}
+
+
+.article-container strong {
+    font-weight: 600; /* More distinct bold */
+    color: #222; /* Slightly darker bold text */
+}
+
+.article-container ul,
+.article-container ol { /* Added OL styling too */
+    list-style-position: outside; /* Bullets/numbers outside the text block */
+    margin-left: 0; /* Reset margin-left from global */
+    padding-left: 30px; /* Space for bullets/numbers */
+}
+
+.article-container ul li,
+.article-container ol li {
+    margin-bottom: 0.8em;
+    padding-left: 5px; /* Small space between bullet and text */
+}
+.article-container ul {
+    list-style-type: disc;
+}
+.article-container ol {
+    list-style-type: decimal;
+}
+
+
+.article-container .comments-section {
+    margin-top: 60px; /* More space before comments */
+    border-top: 2px solid #d0d0d0; /* More prominent border */
+    padding-top: 35px;
+}
+
+.article-container .comments-section h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.6em;
+    margin-bottom: 1.2em;
+    color: #121418;
 }
